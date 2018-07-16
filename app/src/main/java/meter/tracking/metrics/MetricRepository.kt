@@ -10,16 +10,15 @@ import meter.tracking.db.model.MetricsWithRecord
  */
 class MetricRepository(private val metricDao: MetricDao) : MetricDataSource {
 
+    private lateinit var metrics: List<Metric>
 
-    private var metrics: List<Metric>? = null
+    override fun init() {
+        this.metrics = metricDao.getAll()
+    }
 
     override fun getMetrics(): List<Metric> {
-        return if (metrics == null) {
-            this.metrics = metricDao.getAll()
-            this.metrics!!
-        } else {
-            this.metrics!!
-        }
+        // return metrics from local cache
+        return this.metrics
     }
 
     override fun getMetric(id: Long): MetricsWithRecord? = metricDao.get(id)
