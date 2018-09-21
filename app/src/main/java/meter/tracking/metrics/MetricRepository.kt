@@ -1,7 +1,6 @@
 package meter.tracking.metrics
 
 import meter.tracking.db.dao.MetricDao
-import meter.tracking.db.model.HistoryFrequency
 import meter.tracking.db.model.Metric
 import meter.tracking.db.model.MetricsWithRecord
 

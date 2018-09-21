@@ -9,6 +9,12 @@ import meter.tracking.db.DataBase
 import meter.tracking.db.MetricsDataBase
 import meter.tracking.metrics.MetricRepository
 
+/**
+ * A standard launch activity with splash screen.
+ * Using MVP pattern, init stuff is done into [LaunchPresenter]
+ * @author tweissbeck
+ * @since 1.0.0
+ */
 class LaunchActivity : AppCompatActivity(), LaunchContract.View {
 
     override lateinit var presenter: LaunchContract.Presenter

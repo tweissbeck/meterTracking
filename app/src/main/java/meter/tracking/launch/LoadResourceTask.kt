@@ -4,6 +4,7 @@ import android.os.AsyncTask
 import meter.tracking.metrics.MetricDataSource
 
 /**
+ * An async task that deal with first metrics loading
  * @param callback a function called when task is finished
  * @author tweissbeck
  * @since 1.0.0

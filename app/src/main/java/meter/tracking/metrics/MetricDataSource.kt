@@ -9,6 +9,11 @@ import meter.tracking.db.model.MetricsWithRecord
  */
 interface MetricDataSource {
 
+    /**
+     * A hook if some stuff has to be done when application is launching. Eg: put in cache some data
+     */
+    fun init()
+
     fun getMetrics(): List<Metric>
 
     fun getMetric(id: Long): MetricsWithRecord?
