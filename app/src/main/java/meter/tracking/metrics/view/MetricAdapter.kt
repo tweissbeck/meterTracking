@@ -1,9 +1,11 @@
 package meter.tracking.metrics.view
 
 import android.support.v7.widget.RecyclerView
+
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.LinearLayout
+
 import android.widget.TextView
 import meter.tracking.R
 import meter.tracking.db.model.Metric
@@ -17,8 +19,6 @@ class MetricAdapter(private val data: List<Metric>) : RecyclerView.Adapter<Metri
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MetricViewHolder {
         val layout = LayoutInflater.from(parent.context).inflate(R.layout.metric_list_view_item, parent,
                                                                  false) as LinearLayout
-
-
         return MetricViewHolder(layout)
     }
 
@@ -36,7 +36,5 @@ class MetricAdapter(private val data: List<Metric>) : RecyclerView.Adapter<Metri
         name.text = currentMetric.name
         value.text = currentMetric.value.toString()
         unit.text = currentMetric.measureLabel
-
-
     }
 }

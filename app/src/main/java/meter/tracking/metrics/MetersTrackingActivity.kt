@@ -3,10 +3,8 @@ package meter.tracking.metrics
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
-import kotlinx.android.synthetic.main.activity_metrics_tracker_list.*
+import android.support.v7.widget.RecyclerView
 import meter.tracking.R
-import meter.tracking.R.id.list
-import meter.tracking.db.DataBase
 import meter.tracking.metrics.view.MetricAdapter
 import org.koin.android.ext.android.inject
 
@@ -17,17 +15,25 @@ import org.koin.android.ext.android.inject
  */
 class MetersTrackingActivity : AppCompatActivity() {
 
-    private lateinit var metricAdapter: MetricAdapter
-    private lateinit var layoutManager: LinearLayoutManager
+    private lateinit var recyclerView: RecyclerView
+    private lateinit var viewAdapter: RecyclerView.Adapter<*>
+    private lateinit var viewManager: RecyclerView.LayoutManager
+
     private val metricRepository:MetricRepository by inject()
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_metrics_tracker_list)
+        setSupportActionBar(findViewById(R.id.metric_activity_toolbar))
 
-        this.layoutManager = LinearLayoutManager(this)
-        this.metricAdapter = MetricAdapter(metricRepository.getMetrics())
+        this.viewManager = LinearLayoutManager(this)
+        this.viewAdapter = MetricAdapter(metricRepository.getMetrics())
+
+        recyclerView = findViewById<RecyclerView>(R.id.metrics_list_recycler_view).apply {
+            layoutManager = viewManager
+            adapter = viewAdapter
+        }
 
     }
 }

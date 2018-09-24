@@ -1,4 +1,10 @@
 <resources>
+    <!-- Main stuff here -->
     <string name="app_name">Meters Tracking</string>
     <string name="launch_display_name">Meters Tracking</string>
+
+    <!-- Main acitivty: MetricTrackingActivity -->
+    <string name="metric_activity_menu_info">Meters tracking</string>
+    <string name="action_settings">Action settings</string>
+
 </resources>
