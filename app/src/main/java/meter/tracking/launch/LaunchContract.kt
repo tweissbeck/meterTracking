@@ -15,7 +15,6 @@ interface LaunchContract {
     }
 
     interface Presenter {
-        fun load()
         fun init()
     }
 }

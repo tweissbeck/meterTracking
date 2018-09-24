@@ -3,11 +3,12 @@ package meter.tracking.launch
 import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
-import meter.tracking.metrics.MetersTrackingActivity
 import meter.tracking.R
-import meter.tracking.db.DataBase
-import meter.tracking.db.MetricsDataBase
+import meter.tracking.di.ApplicationModule.appModule
+import meter.tracking.metrics.MetersTrackingActivity
 import meter.tracking.metrics.MetricRepository
+import org.koin.android.ext.android.inject
+import org.koin.android.ext.android.startKoin
 
 /**
  * A standard launch activity with splash screen.
@@ -18,14 +19,15 @@ import meter.tracking.metrics.MetricRepository
 class LaunchActivity : AppCompatActivity(), LaunchContract.View {
 
     override lateinit var presenter: LaunchContract.Presenter
+    private val repository: MetricRepository by inject()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_launch)
+        // Start Koin DI. Modules definition are in ApplicationModule object
+        startKoin(this, listOf(appModule))
 
-        val db: MetricsDataBase = DataBase.getInstance(applicationContext)
-        val metricRepository = MetricRepository(db.metricDao)
-        presenter = LaunchPresenter(this, metricRepository)
+        presenter = LaunchPresenter(this, repository)
         presenter.init()
     }
 

@@ -1,5 +1,6 @@
 package meter.tracking.launch
 
+import android.util.Log
 import meter.tracking.metrics.MetersTrackingActivity
 import meter.tracking.metrics.MetricDataSource
 
@@ -29,13 +30,7 @@ class LaunchPresenter(private val view: LaunchContract.View,
     }
 
     override fun init() {
-        // Load the task, put them in cache if the repository handle it.
-        metricsRepo.getMetrics()
+        Log.i(TAG, "Loading metrics")
+        LoadResourceTask(metricsRepo) { onLoadFinished() }.execute(Unit)
     }
-
-    override fun load() {
-        LoadResourceTask(metricsRepo, { onLoadFinished() }).execute(Unit)
-    }
-
-
 }

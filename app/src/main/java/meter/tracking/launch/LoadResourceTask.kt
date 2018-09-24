@@ -1,6 +1,7 @@
 package meter.tracking.launch
 
 import android.os.AsyncTask
+import android.util.Log
 import meter.tracking.metrics.MetricDataSource
 
 /**
@@ -12,14 +13,18 @@ import meter.tracking.metrics.MetricDataSource
 class LoadResourceTask(private val metricsRepo: MetricDataSource, private val callback: () -> Unit) :
         AsyncTask<Unit, Unit, Unit>() {
 
+    companion object {
+        const val TAG = "LoadResourceTask"
+    }
+
     override fun doInBackground(vararg p0: Unit?) {
-        //Thread.sleep(3000)
         // Just load the metrics in cache when implementation allow it
         metricsRepo.getMetrics()
         return
     }
 
     override fun onPostExecute(result: Unit?) {
+        Log.i(TAG, "Metrics loaded")
         callback.invoke()
     }
 
