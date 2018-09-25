@@ -1,0 +1,15 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item android:id="@+id/action_create_metric_cancel"
+
+        android:icon="@drawable/ic_clear_white"
+        app:showAsAction="ifRoom"
+        app:actionViewClass="android.support.v7.widget.SearchView"
+        android:title="@string/action_cancel" />
+
+    <item android:id="@+id/action_new_metric_save"
+        android:title="@string/action_new_metric_save"
+        app:showAsAction="always"/>
+
+</menu>

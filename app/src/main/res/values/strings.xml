@@ -7,5 +7,7 @@
     <string name="action_settings">Application settings</string>
     <string name="action_search">Search</string>
     <string name="action_new">New metric</string>
+    <string name="action_cancel">Cancel</string>
+    <string name="action_new_metric_save">Save</string>
 
 </resources>
