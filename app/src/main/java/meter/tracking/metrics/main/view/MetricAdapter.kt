@@ -1,4 +1,4 @@
-package meter.tracking.metrics.view
+package meter.tracking.metrics.main.view
 
 import android.support.v7.widget.RecyclerView
 

@@ -1,8 +1,8 @@
 package meter.tracking.launch
 
 import android.util.Log
-import meter.tracking.metrics.MetersTrackingActivity
-import meter.tracking.metrics.MetricDataSource
+import meter.tracking.metrics.main.MetersTrackingActivity
+import meter.tracking.metrics.main.MetricDataSource
 
 
 /**

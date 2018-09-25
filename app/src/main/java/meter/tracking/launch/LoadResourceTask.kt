@@ -2,7 +2,7 @@ package meter.tracking.launch
 
 import android.os.AsyncTask
 import android.util.Log
-import meter.tracking.metrics.MetricDataSource
+import meter.tracking.metrics.main.MetricDataSource
 
 /**
  * An async task that deal with first metrics loading

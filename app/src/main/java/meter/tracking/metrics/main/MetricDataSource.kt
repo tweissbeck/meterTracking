@@ -1,4 +1,4 @@
-package meter.tracking.metrics
+package meter.tracking.metrics.main
 
 import meter.tracking.db.model.Metric
 import meter.tracking.db.model.MetricsWithRecord

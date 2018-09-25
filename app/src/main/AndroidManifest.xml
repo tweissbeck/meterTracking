@@ -14,12 +14,12 @@
             android:noHistory="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".metrics.MetersTrackingActivity">
-
-        </activity>
+        <activity android:name=".metrics.main.MetersTrackingActivity"></activity>
+        <activity android:name=".metrics.create.CreateNewMetricActivity"></activity>
     </application>
 
 </manifest>

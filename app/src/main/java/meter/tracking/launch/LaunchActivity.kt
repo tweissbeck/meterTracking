@@ -5,14 +5,16 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import meter.tracking.R
 import meter.tracking.di.ApplicationModule.appModule
-import meter.tracking.metrics.MetersTrackingActivity
-import meter.tracking.metrics.MetricRepository
+import meter.tracking.metrics.main.MetersTrackingActivity
+import meter.tracking.metrics.main.MetricRepository
 import org.koin.android.ext.android.inject
 import org.koin.android.ext.android.startKoin
+import org.koin.standalone.StandAloneContext.stopKoin
 
 /**
  * A standard launch activity with splash screen.
  * Using MVP pattern, init stuff is done into [LaunchPresenter]
+ * Load metrics from data base in init process
  * @author tweissbeck
  * @since 1.0.0
  */
@@ -36,4 +38,8 @@ class LaunchActivity : AppCompatActivity(), LaunchContract.View {
         startActivity(intent)
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        stopKoin()
+    }
 }

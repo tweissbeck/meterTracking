@@ -3,8 +3,9 @@
     <string name="app_name">Meters Tracking</string>
     <string name="launch_display_name">Meters Tracking</string>
 
-    <!-- Main acitivty: MetricTrackingActivity -->
-    <string name="metric_activity_menu_info">Meters tracking</string>
-    <string name="action_settings">Action settings</string>
+    <!-- MENU -->
+    <string name="action_settings">Application settings</string>
+    <string name="action_search">Search</string>
+    <string name="action_new">New metric</string>
 
 </resources>
