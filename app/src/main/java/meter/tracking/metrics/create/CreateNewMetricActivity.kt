@@ -18,6 +18,7 @@ class CreateNewMetricActivity : AppCompatActivity() {
 
         val actionBar = findViewById<Toolbar>(R.id.create_metric_activity_toolbar)
         setSupportActionBar(actionBar)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {

@@ -3,6 +3,7 @@
     package="meter.tracking">
 
     <application
+        android:name=".MetricApp"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -19,7 +20,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".metrics.main.MetersTrackingActivity"></activity>
-        <activity android:name=".metrics.create.CreateNewMetricActivity"></activity>
+        <activity android:name=".metrics.create.CreateNewMetricActivity" android:parentActivityName=".metrics.main.MetersTrackingActivity"></activity>
     </application>
 
 </manifest>

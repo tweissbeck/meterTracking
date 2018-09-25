@@ -5,7 +5,6 @@
 
         android:icon="@drawable/ic_clear_white"
         app:showAsAction="ifRoom"
-        app:actionViewClass="android.support.v7.widget.SearchView"
         android:title="@string/action_cancel" />
 
     <item android:id="@+id/action_new_metric_save"
