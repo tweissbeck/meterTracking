@@ -18,7 +18,11 @@ class CreateNewMetricActivity : AppCompatActivity() {
 
         val actionBar = findViewById<Toolbar>(R.id.create_metric_activity_toolbar)
         setSupportActionBar(actionBar)
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.apply {
+            setDisplayHomeAsUpEnabled(true)
+            setHomeAsUpIndicator(R.drawable.ic_clear_white)
+            setTitle(R.string.action_new)
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -27,8 +31,8 @@ class CreateNewMetricActivity : AppCompatActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean = when(item.itemId) {
-        R.id.action_create_metric_cancel -> {
-            onBackPressed()
+        R.id.action_new_metric_save -> {
+            // TODO
             true
         }
         else -> super.onOptionsItemSelected(item)
