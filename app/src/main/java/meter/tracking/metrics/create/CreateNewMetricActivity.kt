@@ -1,10 +1,12 @@
 package meter.tracking.metrics.create
 
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.EditText
+import android.widget.Spinner
 import meter.tracking.R
 
 /**
@@ -32,7 +34,10 @@ class CreateNewMetricActivity : AppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean = when(item.itemId) {
         R.id.action_new_metric_save -> {
-            // TODO
+            val name = findViewById<EditText>(R.id.metric_name)
+            val type  =findViewById<Spinner>(R.id.metric_type)
+            val unit = findViewById<Spinner>(R.id.metric_unit)
+
             true
         }
         else -> super.onOptionsItemSelected(item)

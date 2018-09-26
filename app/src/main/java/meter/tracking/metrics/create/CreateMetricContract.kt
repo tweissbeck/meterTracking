@@ -8,7 +8,12 @@ import meter.tracking.BaseView
  */
 interface CreateMetricContract {
 
-    interface View : BaseView<Presenter>
+    interface View : BaseView<Presenter> {
+        fun showMetricListWithResult(message: String)
+        fun showMetricListWithError(error: String)
+    }
 
-    interface Presenter
+    interface Presenter{
+        fun createMetric(m:MetricDTO)
+    }
 }

@@ -1,13 +1,20 @@
 package meter.tracking.metrics.main
 
+import meter.tracking.db.dao.MetricDao
 import meter.tracking.db.model.Metric
 import meter.tracking.db.model.MetricsWithRecord
+import meter.tracking.metrics.create.MetricDTO
 
 /**
  * @author tweissbeck
  * @since 1.0.0
  */
 interface MetricDataSource {
+
+    interface SaveMetricCallBack{
+        fun onSucess(metric: Metric)
+        fun onDBError()
+    }
 
     /**
      * A hook if some stuff has to be done when application is launching. Eg: put in cache some data
@@ -17,4 +24,6 @@ interface MetricDataSource {
     fun getMetrics(): List<Metric>
 
     fun getMetric(id: Long): MetricsWithRecord?
+
+    fun saveMetric(dto: MetricDTO, callback: SaveMetricCallBack)
 }
