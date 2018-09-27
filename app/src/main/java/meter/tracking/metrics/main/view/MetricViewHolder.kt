@@ -1,7 +1,7 @@
 package meter.tracking.metrics.main.view
 
-import android.support.v7.widget.RecyclerView
 import android.widget.LinearLayout
+import androidx.recyclerview.widget.RecyclerView
 
 /**
  * @author tweissbeck

@@ -9,7 +9,8 @@
     <string name="action_new">New metric</string>
     <string name="action_cancel">Cancel</string>
     <string name="action_new_metric_save">Save</string>
-    <string name="metric_form_unit">Unité</string>
+    <string name="metric_form_unit">Unit</string>
     <string name="metric_form_name_default">Name</string>
+    <string name="title_activity_main">MainActivity</string>
 
 </resources>

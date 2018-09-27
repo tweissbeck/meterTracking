@@ -2,7 +2,7 @@ package meter.tracking.launch
 
 import android.content.Intent
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 import meter.tracking.R
 import meter.tracking.metrics.main.MetersTrackingActivity
 import meter.tracking.metrics.main.MetricRepository

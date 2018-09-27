@@ -1,7 +1,7 @@
 package meter.tracking.db.model
 
-import android.arch.persistence.room.Entity
-import android.arch.persistence.room.PrimaryKey
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 
 /**
  * A MeasuringType is an kind of measure defined by a label and a precision. For instance "mileage counter" with precision 0, symbol miles

@@ -1,6 +1,6 @@
 package meter.tracking.di
 
-import android.arch.persistence.room.Room
+import androidx.room.Room
 import meter.tracking.db.MetricsDataBase
 import meter.tracking.db.dao.MetricDao
 import meter.tracking.metrics.main.MetricRepository

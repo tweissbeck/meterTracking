@@ -1,6 +1,6 @@
 package meter.tracking.db.converter
 
-import android.arch.persistence.room.TypeConverter
+import androidx.room.TypeConverter
 import meter.tracking.db.model.HistoryFrequency
 
 /**

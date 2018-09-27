@@ -1,9 +1,9 @@
 package meter.tracking.db.model
 
-import android.arch.persistence.room.ColumnInfo
-import android.arch.persistence.room.Entity
-import android.arch.persistence.room.PrimaryKey
-import android.arch.persistence.room.Relation
+import androidx.room.ColumnInfo
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+import androidx.room.Relation
 
 /**
  * @author tweissbeck
@@ -13,6 +13,6 @@ import android.arch.persistence.room.Relation
 class MetricsWithRecord(@PrimaryKey val id: Long, val name: String, val value: Long, @ColumnInfo(
         name = "measureLabel") val measureLabel: String,
                         val historyFrequency: HistoryFrequency){
-    @android.arch.persistence.room.Relation(parentColumn = "id", entityColumn = "metric")
+    @Relation(parentColumn = "id", entityColumn = "metric")
     lateinit var records: List<MetricRecord>
 }

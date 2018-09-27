@@ -19,8 +19,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".metrics.main.MetersTrackingActivity"></activity>
-        <activity android:name=".metrics.create.CreateNewMetricActivity" android:parentActivityName=".metrics.main.MetersTrackingActivity"></activity>
+        <activity android:name=".metrics.main.MetersTrackingActivity" />
+        <activity
+            android:name=".metrics.create.CreateNewMetricActivity"
+            android:parentActivityName=".metrics.main.MetersTrackingActivity" />
+        <activity
+            android:name=".MainActivity"
+            android:label="@string/title_activity_main"></activity>
     </application>
 
 </manifest>

@@ -1,9 +1,9 @@
 package meter.tracking.db.model
 
-import android.arch.persistence.room.ColumnInfo
-import android.arch.persistence.room.Entity
-import android.arch.persistence.room.ForeignKey
-import android.arch.persistence.room.PrimaryKey
+import androidx.room.ColumnInfo
+import androidx.room.Entity
+import androidx.room.ForeignKey
+import androidx.room.PrimaryKey
 
 /**
  * Metric entity
@@ -18,6 +18,10 @@ import android.arch.persistence.room.PrimaryKey
 @Entity(tableName = "metric",
         foreignKeys = [ForeignKey(entity = MeasuringType::class, parentColumns = ["label"],
                                   childColumns = ["measureLabel"])])
-open class Metric(@PrimaryKey val id: Long, val name: String, val value: Long, @ColumnInfo(
+open class Metric(val name: String, val value: Long, @ColumnInfo(
         name = "measureLabel") val measureLabel: String,
-                  val historyFrequency: HistoryFrequency)
+                  val historyFrequency: HistoryFrequency){
+
+    @PrimaryKey
+    var id: Long = 0
+}

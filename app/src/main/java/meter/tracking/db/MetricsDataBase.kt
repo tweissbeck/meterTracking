@@ -1,8 +1,9 @@
 package meter.tracking.db
 
-import android.arch.persistence.room.Database
-import android.arch.persistence.room.RoomDatabase
-import android.arch.persistence.room.TypeConverters
+
+import androidx.room.Database
+import androidx.room.RoomDatabase
+import androidx.room.TypeConverters
 import meter.tracking.db.converter.HistoryTypeConverter
 import meter.tracking.db.dao.MetricDao
 import meter.tracking.db.model.MeasuringType

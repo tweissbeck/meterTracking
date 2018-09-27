@@ -1,12 +1,13 @@
 package meter.tracking.metrics.create
 
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.Toolbar
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.ArrayAdapter
 import android.widget.EditText
 import android.widget.Spinner
+import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
 import meter.tracking.R
 
 /**
@@ -25,6 +26,14 @@ class CreateNewMetricActivity : AppCompatActivity() {
             setHomeAsUpIndicator(R.drawable.ic_clear_white)
             setTitle(R.string.action_new)
         }
+
+        val spinner: Spinner = findViewById(R.id.metric_type)
+        ArrayAdapter.createFromResource(this, R.array.frequency, android.R.layout.simple_spinner_item).also {
+            arrayAdapter -> arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+            spinner.adapter = arrayAdapter
+        }
+
+
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
