@@ -5,10 +5,10 @@ package meter.tracking.db.model
  * @since 1.0.0
  */
 enum class HistoryFrequency(private val translateKey: String) {
-    DAILY("frequency.daily"),
-    WEEKLY("frequency.weekly"),
-    MONTHLY("frequency.monthly"),
-    ANNUAL("frequency.annual");
+    DAILY("frequency_daily"),
+    WEEKLY("frequency_weekly"),
+    MONTHLY("frequency_monthly"),
+    ANNUAL("frequency_annual");
 
     fun getKey(): String = translateKey
 }

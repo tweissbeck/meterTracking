@@ -12,5 +12,12 @@
     <string name="metric_form_unit">Unit</string>
     <string name="metric_form_name_default">Name</string>
     <string name="metric_start_date_label">Start Date</string>
+    <string name="metric_initial_value_label">Initial value</string>
+
+    <!-- Frequency-->
+    <string name="frequency_daily">Daily</string>
+    <string name="frequency_weekly">Weekly</string>
+    <string name="frequency_monthly">Monthly</string>
+    <string name="frequency_annual">Annual</string>
 
 </resources>

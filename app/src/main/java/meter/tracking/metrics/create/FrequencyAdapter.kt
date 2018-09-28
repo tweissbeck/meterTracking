@@ -21,7 +21,7 @@ class FrequencyAdapter(context: Context) :
 
         val value = values[p0]
         val localizedValue = context.resources.getString(
-                context.resources.getIdentifier(value.getKey(), "string", null))
+                context.resources.getIdentifier(value.getKey(), "string", context.packageName))
         val inflater = LayoutInflater.from(context)
         val textView = inflater.inflate(android.R.layout.simple_spinner_item, p2, false) as TextView
         textView.text = localizedValue
