@@ -11,6 +11,6 @@
     <string name="action_new_metric_save">Save</string>
     <string name="metric_form_unit">Unit</string>
     <string name="metric_form_name_default">Name</string>
-    <string name="title_activity_main">MainActivity</string>
+    <string name="metric_start_date_label">Start Date</string>
 
 </resources>
