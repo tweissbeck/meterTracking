@@ -77,7 +77,6 @@
         android:layout_marginTop="8dp"
         android:ems="10"
         android:gravity="center_vertical"
-        android:inputType="date"
         android:text="@string/metric_start_date_label"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/metric_unit_label" />
@@ -93,6 +92,32 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/metric_start_date_label"
         app:layout_constraintTop_toBottomOf="@+id/metric_unit_label" />
+
+    <TextView
+        android:id="@+id/metric_initial_value_label"
+        android:layout_width="0dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="8dp"
+        android:ems="10"
+        android:gravity="center_vertical"
+        android:text="@string/metric_initial_value_label"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/metric_start_date_label" />
+
+    <EditText
+        android:id="@+id/metric_initial_value"
+        android:layout_width="0dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="32dp"
+        android:ems="10"
+        android:inputType="number"
+        android:text="0"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/metric_initial_value_label"
+        app:layout_constraintTop_toBottomOf="@+id/metric_start_date_label" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
