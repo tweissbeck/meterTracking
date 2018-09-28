@@ -28,9 +28,9 @@ class CreateNewMetricActivity : AppCompatActivity() {
         }
 
         val spinner: Spinner = findViewById(R.id.metric_type)
-        ArrayAdapter.createFromResource(this, R.array.frequency, android.R.layout.simple_spinner_item).also {
-            arrayAdapter -> arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-            spinner.adapter = arrayAdapter
+       FrequencyAdapter(this).apply {
+            setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+            spinner.adapter = this
         }
 
 
