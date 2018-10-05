@@ -1,5 +1,7 @@
 package meter.tracking.metrics.main
 
+import io.reactivex.Maybe
+import io.reactivex.Single
 import meter.tracking.db.dao.MetricDao
 import meter.tracking.db.model.Metric
 import meter.tracking.db.model.MetricsWithRecord
@@ -21,9 +23,9 @@ interface MetricDataSource {
      */
     fun init()
 
-    fun getMetrics(): List<Metric>
+    fun getMetrics(): Single<List<Metric>>
 
-    fun getMetric(id: Long): MetricsWithRecord?
+    fun getMetric(id: Long): Maybe<MetricsWithRecord>
 
     fun saveMetric(dto: MetricDTO, callback: SaveMetricCallBack)
 }

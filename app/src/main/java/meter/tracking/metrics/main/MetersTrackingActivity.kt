@@ -7,7 +7,9 @@ import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import io.reactivex.functions.BiConsumer
 import meter.tracking.R
+import meter.tracking.db.model.Metric
 import meter.tracking.metrics.create.CreateNewMetricActivity
 import meter.tracking.metrics.main.view.MetricAdapter
 import org.koin.android.ext.android.inject
@@ -20,7 +22,7 @@ import org.koin.android.ext.android.inject
 class MetersTrackingActivity : AppCompatActivity() {
 
     private lateinit var recyclerView: RecyclerView
-    private lateinit var viewAdapter: RecyclerView.Adapter<*>
+    private lateinit var viewAdapter: MetricAdapter
     private lateinit var viewManager: RecyclerView.LayoutManager
 
     /**
@@ -35,12 +37,16 @@ class MetersTrackingActivity : AppCompatActivity() {
         setSupportActionBar(findViewById(R.id.metric_activity_toolbar))
 
         this.viewManager = LinearLayoutManager(this)
-        this.viewAdapter = MetricAdapter(metricRepository.getMetrics())
+        this.viewAdapter = MetricAdapter()
 
         recyclerView = findViewById<RecyclerView>(R.id.metrics_list_recycler_view).apply {
             layoutManager = viewManager
             adapter = viewAdapter
         }
+        val success: (List<Metric>) -> Unit = { result: List<Metric> ->
+            viewAdapter.update(result)
+        }
+        metricRepository.getMetrics().subscribe(success).dispose()
 
     }
 

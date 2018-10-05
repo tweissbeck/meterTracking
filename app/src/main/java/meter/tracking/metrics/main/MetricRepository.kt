@@ -1,6 +1,10 @@
 package meter.tracking.metrics.main
 
 import android.os.AsyncTask
+import io.reactivex.Maybe
+import io.reactivex.Observable
+import io.reactivex.Single
+import io.reactivex.SingleObserver
 import meter.tracking.db.dao.MetricDao
 import meter.tracking.db.model.HistoryFrequency
 import meter.tracking.db.model.Metric
@@ -22,19 +26,16 @@ class MetricRepository(private val metricDao: MetricDao) : MetricDataSource {
 
     private var metrics: List<Metric>? = null
 
-    override fun getMetrics(): List<Metric> {
-        return if (metrics == null) {
-            this.metrics = metricDao.getAll() + listOf(Metric("CAR 1", 1420, "Km", HistoryFrequency.MONTHLY),
-                                                       Metric("CAR 2", 15874, "Km", HistoryFrequency.MONTHLY),
-                                                       Metric("Water", 1420, "L", HistoryFrequency.MONTHLY),
-                                                       Metric("Elec", 142078, "Watt", HistoryFrequency.MONTHLY),
-                                                       Metric("CAR 1", 1420, "Km", HistoryFrequency.MONTHLY))
-            this.metrics!!
-        } else {
-            this.metrics!!
+    override fun getMetrics(): Single<List<Metric>> {
+        return metricDao.getAll().map { collection ->
+            collection + listOf(Metric("CAR 1", 1420, "Km", HistoryFrequency.MONTHLY),
+                                Metric("CAR 2", 15874, "Km", HistoryFrequency.MONTHLY),
+                                Metric("Water", 1420, "L", HistoryFrequency.MONTHLY),
+                                Metric("Elec", 142078, "Watt", HistoryFrequency.MONTHLY),
+                                Metric("CAR 1", 1420, "Km", HistoryFrequency.MONTHLY))
         }
     }
 
-    override fun getMetric(id: Long): MetricsWithRecord? = metricDao.get(id)
+    override fun getMetric(id: Long): Maybe<MetricsWithRecord> = metricDao.get(id)
 
 }

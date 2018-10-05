@@ -5,6 +5,7 @@ import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import io.reactivex.Single
 import meter.tracking.R
 import meter.tracking.db.model.Metric
 
@@ -13,13 +14,19 @@ import meter.tracking.db.model.Metric
  * @author tweissbeck
  * @since 1.0.0
  */
-class MetricAdapter(private val data: List<Metric>) : RecyclerView.Adapter<MetricViewHolder>() {
+class MetricAdapter : RecyclerView.Adapter<MetricViewHolder>() {
+
+    val data = mutableListOf<Metric>()
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MetricViewHolder {
         val layout = LayoutInflater.from(parent.context).inflate(R.layout.metric_list_view_item, parent,
                                                                  false) as LinearLayout
         return MetricViewHolder(layout)
     }
 
+    fun update(data: List<Metric>){
+        this.data + data
+        notifyDataSetChanged()
+    }
 
     override fun getItemCount(): Int = data.size
 

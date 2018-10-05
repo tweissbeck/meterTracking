@@ -4,6 +4,8 @@ package meter.tracking.db.dao
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
+import io.reactivex.Maybe
+import io.reactivex.Single
 import meter.tracking.db.model.Metric
 import meter.tracking.db.model.MetricsWithRecord
 
@@ -18,10 +20,10 @@ import meter.tracking.db.model.MetricsWithRecord
 interface MetricDao {
 
     @Query("SELECT id, name, value, measureLabel, historyFrequency FROM metric")
-    fun getAll(): List<Metric>
+    fun getAll(): Single<List<Metric>>
 
     @Query("SELECT metric.id, metric.name, metric.value, metric.measureLabel, historyFrequency FROM metric, metricRecord WHERE metric.id = :id")
-    fun get(id: Long): MetricsWithRecord?
+    fun get(id: Long): Maybe<MetricsWithRecord>
 
     @Insert
     fun insert(m: Metric)
