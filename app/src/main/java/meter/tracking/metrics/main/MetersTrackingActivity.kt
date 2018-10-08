@@ -7,7 +7,8 @@ import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import io.reactivex.functions.BiConsumer
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
 import meter.tracking.R
 import meter.tracking.db.model.Metric
 import meter.tracking.metrics.create.CreateNewMetricActivity
@@ -46,7 +47,10 @@ class MetersTrackingActivity : AppCompatActivity() {
         val success: (List<Metric>) -> Unit = { result: List<Metric> ->
             viewAdapter.update(result)
         }
-        metricRepository.getMetrics().subscribe(success).dispose()
+        metricRepository.getMetrics()
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(success)
 
     }
 
