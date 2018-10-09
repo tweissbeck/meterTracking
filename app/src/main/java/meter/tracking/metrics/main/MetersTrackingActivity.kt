@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 import meter.tracking.R
 import meter.tracking.db.model.Metric
@@ -30,6 +31,7 @@ class MetersTrackingActivity : AppCompatActivity() {
      * [MetricRepository] loaded from Koin di
      */
     private val metricRepository: MetricRepository by inject()
+    private val compositeDisposable = CompositeDisposable()
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -47,11 +49,11 @@ class MetersTrackingActivity : AppCompatActivity() {
         val success: (List<Metric>) -> Unit = { result: List<Metric> ->
             viewAdapter.update(result)
         }
-        metricRepository.getMetrics()
+        val disposable = metricRepository.getMetrics()
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(success)
-
+        this.compositeDisposable.add(disposable)
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -67,5 +69,10 @@ class MetersTrackingActivity : AppCompatActivity() {
             true
         }
         else -> super.onOptionsItemSelected(item)
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        this.compositeDisposable.dispose()
     }
 }
