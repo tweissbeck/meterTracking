@@ -11,7 +11,7 @@ import org.koin.android.ext.android.inject
 /**
  * A standard launch activity with splash screen.
  * Using MVP pattern, init stuff is done into [LaunchPresenter]
- * Load metrics from data base in init process
+ *
  * @author tweissbeck
  * @since 1.0.0
  */
