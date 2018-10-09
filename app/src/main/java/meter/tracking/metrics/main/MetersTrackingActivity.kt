@@ -22,11 +22,13 @@ import org.koin.android.ext.android.inject
  * @author tweissbeck
  * @since 1.0.0
  */
-class MetersTrackingActivity : AppCompatActivity() {
+class MetersTrackingActivity : AppCompatActivity(), MetricMainContract.View {
 
     private lateinit var recyclerView: RecyclerView
     private lateinit var viewAdapter: MetricAdapter
     private lateinit var viewManager: RecyclerView.LayoutManager
+
+    override lateinit var presenter: MetricMainContract.Presenter
 
     /**
      * [MetricRepository] loaded from Koin di
@@ -40,8 +42,9 @@ class MetersTrackingActivity : AppCompatActivity() {
         setContentView(R.layout.activity_metrics_tracker_list)
         setSupportActionBar(findViewById(R.id.metric_activity_toolbar))
 
+        this.presenter = MetricMainPresenter(this)
         this.viewManager = LinearLayoutManager(this)
-        this.viewAdapter = MetricAdapter()
+        this.viewAdapter = MetricAdapter(this.presenter)
 
         recyclerView = findViewById<RecyclerView>(R.id.metrics_list_recycler_view).apply {
             layoutManager = viewManager

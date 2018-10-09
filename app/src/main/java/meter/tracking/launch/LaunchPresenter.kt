@@ -6,7 +6,6 @@ import io.reactivex.schedulers.Schedulers
 import meter.tracking.db.model.Metric
 import meter.tracking.metrics.main.MetersTrackingActivity
 import meter.tracking.metrics.main.MetricDataSource
-import io.reactivex.Observable
 import java.util.concurrent.TimeUnit
 
 
@@ -21,7 +20,6 @@ class LaunchPresenter(private val view: LaunchContract.View,
     companion object {
         internal val TAG: String = "LaunchPresenter"
     }
-
 
     init {
         view.presenter = this
@@ -42,6 +40,5 @@ class LaunchPresenter(private val view: LaunchContract.View,
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(onSuccess(), onError())
-
     }
 }

@@ -27,6 +27,21 @@ class MetricRepository(private val metricDao: MetricDao) : MetricDataSource {
                                 Metric("CAR 2", 15874, "Km", HistoryFrequency.MONTHLY),
                                 Metric("Water", 1420, "L", HistoryFrequency.MONTHLY),
                                 Metric("Elec", 142078, "Watt", HistoryFrequency.MONTHLY),
+                                Metric("CAR 1", 1420, "Km", HistoryFrequency.MONTHLY),
+                                Metric("CAR 1", 1420, "Km", HistoryFrequency.MONTHLY),
+                                Metric("CAR 2", 15874, "Km", HistoryFrequency.MONTHLY),
+                                Metric("Water", 1420, "L", HistoryFrequency.MONTHLY),
+                                Metric("Elec", 142078, "Watt", HistoryFrequency.MONTHLY),
+                                Metric("CAR 1", 1420, "Km", HistoryFrequency.MONTHLY),
+                                Metric("CAR 1", 1420, "Km", HistoryFrequency.MONTHLY),
+                                Metric("CAR 2", 15874, "Km", HistoryFrequency.MONTHLY),
+                                Metric("Water", 1420, "L", HistoryFrequency.MONTHLY),
+                                Metric("Elec", 142078, "Watt", HistoryFrequency.MONTHLY),
+                                Metric("CAR 1", 1420, "Km", HistoryFrequency.MONTHLY),
+                                Metric("CAR 1", 1420, "Km", HistoryFrequency.MONTHLY),
+                                Metric("CAR 2", 15874, "Km", HistoryFrequency.MONTHLY),
+                                Metric("Water", 1420, "L", HistoryFrequency.MONTHLY),
+                                Metric("Elec", 142078, "Watt", HistoryFrequency.MONTHLY),
                                 Metric("CAR 1", 1420, "Km", HistoryFrequency.MONTHLY))
         }
     }
