@@ -22,6 +22,12 @@ class MetricAdapter : RecyclerView.Adapter<MetricViewHolder>() {
         return MetricViewHolder(layout)
     }
 
+    fun setUpData(data: List<Metric>){
+        this.data.clear()
+        this.data.addAll(data)
+        notifyDataSetChanged()
+    }
+
     fun update(data: List<Metric>){
         this.data.addAll(data)
         notifyDataSetChanged()

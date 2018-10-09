@@ -18,6 +18,7 @@ import org.koin.android.ext.android.inject
 
 /**
  * The main activity of the application, shows all counters in a recycler view
+ *
  * @author tweissbeck
  * @since 1.0.0
  */
@@ -47,10 +48,10 @@ class MetersTrackingActivity : AppCompatActivity() {
             adapter = viewAdapter
         }
         val success: (List<Metric>) -> Unit = { result: List<Metric> ->
-            viewAdapter.update(result)
+            viewAdapter.setUpData(result)
         }
         val disposable = metricRepository.getMetrics()
-                .subscribeOn(Schedulers.newThread())
+                .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(success)
         this.compositeDisposable.add(disposable)
