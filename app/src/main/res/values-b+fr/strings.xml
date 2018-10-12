@@ -20,4 +20,7 @@
     <string name="frequency_monthly">Mensuel</string>
     <string name="frequency_annual">Annuel</string>
 
+
+    <string name="metric_detail_title">Compteur : %s</string>
+
 </resources>

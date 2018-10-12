@@ -1,6 +1,7 @@
 package meter.tracking.metrics.main
 
 import meter.tracking.BaseView
+import meter.tracking.db.model.Metric
 
 /**
  * @author tweissbeck
@@ -8,7 +9,9 @@ import meter.tracking.BaseView
  */
 interface MetricMainContract {
 
-    interface View : BaseView<Presenter>
+    interface View : BaseView<Presenter> {
+        fun navigateToEditMetricActivity(metric: Metric)
+    }
 
     interface Presenter : MetricRecyclerViewPresenter
 }

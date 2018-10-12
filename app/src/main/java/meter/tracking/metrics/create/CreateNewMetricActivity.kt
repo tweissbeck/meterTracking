@@ -3,7 +3,6 @@ package meter.tracking.metrics.create
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
-import android.widget.ArrayAdapter
 import android.widget.EditText
 import android.widget.Spinner
 import androidx.appcompat.app.AppCompatActivity
@@ -28,12 +27,10 @@ class CreateNewMetricActivity : AppCompatActivity() {
         }
 
         val spinner: Spinner = findViewById(R.id.metric_type)
-       FrequencyAdapter(this).apply {
+        FrequencyAdapter(this).apply {
             setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
             spinner.adapter = this
         }
-
-
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -41,10 +38,10 @@ class CreateNewMetricActivity : AppCompatActivity() {
         return true
     }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean = when(item.itemId) {
+    override fun onOptionsItemSelected(item: MenuItem): Boolean = when (item.itemId) {
         R.id.action_new_metric_save -> {
             val name = findViewById<EditText>(R.id.metric_name)
-            val type  =findViewById<Spinner>(R.id.metric_type)
+            val type = findViewById<Spinner>(R.id.metric_type)
             val unit = findViewById<Spinner>(R.id.metric_unit)
 
             true

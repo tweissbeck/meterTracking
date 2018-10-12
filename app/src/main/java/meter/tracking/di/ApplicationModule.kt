@@ -3,6 +3,7 @@ package meter.tracking.di
 import androidx.room.Room
 import meter.tracking.db.MetricsDataBase
 import meter.tracking.db.dao.MetricDao
+import meter.tracking.metrics.main.MetricDataSource
 import meter.tracking.metrics.main.MetricRepository
 import org.koin.dsl.module.module
 
@@ -13,7 +14,7 @@ import org.koin.dsl.module.module
 object ApplicationModule {
     val appModule = module {
         single { Room.databaseBuilder(get(), MetricsDataBase::class.java, "metric_base").build() }
-        single { MetricRepository(getMetricDAO(get())) }
+        single<MetricDataSource> { MetricRepository(getMetricDAO(get())) }
     }
 
     private fun getMetricDAO(db: MetricsDataBase): MetricDao = db.metricDao

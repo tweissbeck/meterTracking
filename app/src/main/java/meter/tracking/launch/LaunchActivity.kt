@@ -5,6 +5,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import meter.tracking.R
 import meter.tracking.metrics.main.MetersTrackingActivity
+import meter.tracking.metrics.main.MetricDataSource
 import meter.tracking.metrics.main.MetricRepository
 import org.koin.android.ext.android.inject
 
@@ -18,7 +19,7 @@ import org.koin.android.ext.android.inject
 class LaunchActivity : AppCompatActivity(), LaunchContract.View {
 
     override lateinit var presenter: LaunchContract.Presenter
-    private val repository: MetricRepository by inject()
+    private val repository: MetricDataSource by inject()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

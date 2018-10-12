@@ -20,4 +20,7 @@
     <string name="frequency_monthly">Monthly</string>
     <string name="frequency_annual">Annual</string>
 
+
+    <string name="metric_detail_title">Metric: %s</string>
+
 </resources>

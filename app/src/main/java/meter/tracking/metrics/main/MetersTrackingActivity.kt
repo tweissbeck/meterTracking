@@ -13,6 +13,7 @@ import io.reactivex.schedulers.Schedulers
 import meter.tracking.R
 import meter.tracking.db.model.Metric
 import meter.tracking.metrics.create.CreateNewMetricActivity
+import meter.tracking.metrics.detail.MetricDetailActivity
 import meter.tracking.metrics.main.view.MetricAdapter
 import org.koin.android.ext.android.inject
 
@@ -33,7 +34,7 @@ class MetersTrackingActivity : AppCompatActivity(), MetricMainContract.View {
     /**
      * [MetricRepository] loaded from Koin di
      */
-    private val metricRepository: MetricRepository by inject()
+    private val metricRepository: MetricDataSource by inject()
     private val compositeDisposable = CompositeDisposable()
 
 
@@ -78,5 +79,11 @@ class MetersTrackingActivity : AppCompatActivity(), MetricMainContract.View {
     override fun onDestroy() {
         super.onDestroy()
         this.compositeDisposable.dispose()
+    }
+
+    override fun navigateToEditMetricActivity(metric: Metric) {
+        val intent = Intent(this, MetricDetailActivity::class.java)
+        intent.putExtra(MetricDetailActivity.INTENT_EXTRA_METRIC_ID, metric.id)
+        startActivity(intent)
     }
 }
