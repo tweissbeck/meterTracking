@@ -1,4 +1,4 @@
-package meter.tracking.metrics.main
+package meter.tracking.datasource
 
 import io.reactivex.Maybe
 import io.reactivex.Single

@@ -5,8 +5,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import meter.tracking.R
 import meter.tracking.metrics.main.MetersTrackingActivity
-import meter.tracking.metrics.main.MetricDataSource
-import meter.tracking.metrics.main.MetricRepository
+import meter.tracking.datasource.MetricDataSource
 import org.koin.android.ext.android.inject
 
 /**

@@ -13,6 +13,7 @@ import io.reactivex.schedulers.Schedulers
 import meter.tracking.R
 import meter.tracking.db.model.Metric
 import meter.tracking.metrics.create.CreateNewMetricActivity
+import meter.tracking.datasource.MetricDataSource
 import meter.tracking.metrics.detail.MetricDetailActivity
 import meter.tracking.metrics.main.view.MetricAdapter
 import org.koin.android.ext.android.inject

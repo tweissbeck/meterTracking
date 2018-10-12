@@ -1,7 +1,7 @@
 package meter.tracking.metrics.create
 
 import meter.tracking.db.model.Metric
-import meter.tracking.metrics.main.MetricDataSource
+import meter.tracking.datasource.MetricDataSource
 
 /**
  * @author tweissbeck

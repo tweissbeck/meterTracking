@@ -1,6 +1,6 @@
 package meter.tracking.metrics.detail
 
-import meter.tracking.metrics.main.MetricDataSource
+import meter.tracking.datasource.MetricDataSource
 
 /**
  * @author tweissbeck

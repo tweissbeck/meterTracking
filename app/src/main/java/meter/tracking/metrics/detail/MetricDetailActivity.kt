@@ -6,7 +6,7 @@ import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import meter.tracking.R
-import meter.tracking.metrics.main.MetricDataSource
+import meter.tracking.datasource.MetricDataSource
 import org.koin.android.ext.android.inject
 
 class MetricDetailActivity : AppCompatActivity(), MetricDetailContract.MetricDetailView {

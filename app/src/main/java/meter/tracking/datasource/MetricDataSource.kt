@@ -1,8 +1,7 @@
-package meter.tracking.metrics.main
+package meter.tracking.datasource
 
 import io.reactivex.Maybe
 import io.reactivex.Single
-import meter.tracking.db.dao.MetricDao
 import meter.tracking.db.model.Metric
 import meter.tracking.db.model.MetricsWithRecord
 import meter.tracking.metrics.create.MetricDTO

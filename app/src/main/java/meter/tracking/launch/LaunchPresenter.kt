@@ -5,7 +5,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import meter.tracking.db.model.Metric
 import meter.tracking.metrics.main.MetersTrackingActivity
-import meter.tracking.metrics.main.MetricDataSource
+import meter.tracking.datasource.MetricDataSource
 import java.util.concurrent.TimeUnit
 
 
