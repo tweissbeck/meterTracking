@@ -23,26 +23,27 @@ class MetricRepository(private val metricDao: MetricDao) : MetricDataSource {
 
     override fun getMetrics(): Single<List<Metric>> {
         return metricDao.getAll().map { collection ->
-            collection + listOf(Metric("CAR 1", 1420, "Km", HistoryFrequency.MONTHLY),
-                                Metric("CAR 2", 15874, "Km", HistoryFrequency.MONTHLY),
-                                Metric("Water", 1420, "L", HistoryFrequency.MONTHLY),
-                                Metric("Elec", 142078, "Watt", HistoryFrequency.MONTHLY),
-                                Metric("CAR 1", 1420, "Km", HistoryFrequency.MONTHLY),
-                                Metric("CAR 1", 1420, "Km", HistoryFrequency.MONTHLY),
-                                Metric("CAR 2", 15874, "Km", HistoryFrequency.MONTHLY),
-                                Metric("Water", 1420, "L", HistoryFrequency.MONTHLY),
-                                Metric("Elec", 142078, "Watt", HistoryFrequency.MONTHLY),
-                                Metric("CAR 1", 1420, "Km", HistoryFrequency.MONTHLY),
-                                Metric("CAR 1", 1420, "Km", HistoryFrequency.MONTHLY),
-                                Metric("CAR 2", 15874, "Km", HistoryFrequency.MONTHLY),
-                                Metric("Water", 1420, "L", HistoryFrequency.MONTHLY),
-                                Metric("Elec", 142078, "Watt", HistoryFrequency.MONTHLY),
-                                Metric("CAR 1", 1420, "Km", HistoryFrequency.MONTHLY),
-                                Metric("CAR 1", 1420, "Km", HistoryFrequency.MONTHLY),
-                                Metric("CAR 2", 15874, "Km", HistoryFrequency.MONTHLY),
-                                Metric("Water", 1420, "L", HistoryFrequency.MONTHLY),
-                                Metric("Elec", 142078, "Watt", HistoryFrequency.MONTHLY),
-                                Metric("CAR 1", 1420, "Km", HistoryFrequency.MONTHLY))
+            var id = 0L
+            collection + listOf(Metric("CAR 1", 1420, "Km", HistoryFrequency.MONTHLY).apply { this.id = id++ },
+                                Metric("CAR 2", 15874, "Km", HistoryFrequency.MONTHLY).apply { this.id = id++ },
+                                Metric("Water", 1420, "L", HistoryFrequency.MONTHLY).apply { this.id = id++ },
+                                Metric("Elec", 142078, "Watt", HistoryFrequency.MONTHLY).apply { this.id = id++ },
+                                Metric("CAR 1", 1420, "Km", HistoryFrequency.MONTHLY).apply { this.id = id++ },
+                                Metric("CAR 1", 1420, "Km", HistoryFrequency.MONTHLY).apply { this.id = id++ },
+                                Metric("CAR 2", 15874, "Km", HistoryFrequency.MONTHLY).apply { this.id = id++ },
+                                Metric("Water", 1420, "L", HistoryFrequency.MONTHLY).apply { this.id = id++ },
+                                Metric("Elec", 142078, "Watt", HistoryFrequency.MONTHLY).apply { this.id = id++ },
+                                Metric("CAR 1", 1420, "Km", HistoryFrequency.MONTHLY).apply { this.id = id++ },
+                                Metric("CAR 1", 1420, "Km", HistoryFrequency.MONTHLY).apply { this.id = id++ },
+                                Metric("CAR 2", 15874, "Km", HistoryFrequency.MONTHLY).apply { this.id = id++ },
+                                Metric("Water", 1420, "L", HistoryFrequency.MONTHLY).apply { this.id = id++ },
+                                Metric("Elec", 142078, "Watt", HistoryFrequency.MONTHLY).apply { this.id = id++ },
+                                Metric("CAR 1", 1420, "Km", HistoryFrequency.MONTHLY).apply { this.id = id++ },
+                                Metric("CAR 1", 1420, "Km", HistoryFrequency.MONTHLY).apply { this.id = id++ },
+                                Metric("CAR 2", 15874, "Km", HistoryFrequency.MONTHLY).apply { this.id = id++ },
+                                Metric("Water", 1420, "L", HistoryFrequency.MONTHLY).apply { this.id = id++ },
+                                Metric("Elec", 142078, "Watt", HistoryFrequency.MONTHLY).apply { this.id = id++ },
+                                Metric("CAR 1", 1420, "Km", HistoryFrequency.MONTHLY).apply { this.id = id++ })
         }
     }
 

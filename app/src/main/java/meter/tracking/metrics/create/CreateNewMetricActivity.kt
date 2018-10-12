@@ -18,12 +18,12 @@ class CreateNewMetricActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_create_new_metric)
 
-        val actionBar = findViewById<Toolbar>(R.id.create_metric_activity_toolbar)
-        setSupportActionBar(actionBar)
+        val toolbar = findViewById<Toolbar>(R.id.create_metric_activity_toolbar)
+        setSupportActionBar(toolbar)
         supportActionBar?.apply {
             setDisplayHomeAsUpEnabled(true)
             setHomeAsUpIndicator(R.drawable.ic_clear_white)
-            setTitle(R.string.action_new)
+            title = getString(R.string.action_new)
         }
 
         val spinner: Spinner = findViewById(R.id.metric_type)

@@ -42,7 +42,7 @@ class MetricDetailActivity : AppCompatActivity(), MetricDetailContract.MetricDet
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean = when (item.itemId) {
-        R.id.action_new_metric_save -> true
+        R.id.action_edit_metric_save -> true
         else -> super.onOptionsItemSelected(item)
     }
 
