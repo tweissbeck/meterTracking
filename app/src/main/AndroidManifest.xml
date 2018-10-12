@@ -15,7 +15,6 @@
             android:noHistory="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -24,7 +23,8 @@
             android:name=".metrics.create.CreateNewMetricActivity"
             android:parentActivityName=".metrics.main.MetersTrackingActivity" />
         <activity
-            android:name=".metrics.detail.MetricDetailActivity"/>
+            android:name=".metrics.detail.MetricDetailActivity"
+            android:parentActivityName=".metrics.main.MetersTrackingActivity" />
     </application>
 
 </manifest>
