@@ -16,5 +16,6 @@ interface LaunchContract {
 
     interface Presenter {
         fun init()
+        fun onDestroy()
     }
 }

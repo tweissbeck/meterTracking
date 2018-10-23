@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import meter.tracking.R
 import meter.tracking.datasource.MetricDataSource
+import meter.tracking.db.model.MetricsWithRecord
 import org.koin.android.ext.android.inject
 
 class MetricDetailActivity : AppCompatActivity(), MetricDetailContract.MetricDetailView {
@@ -22,8 +23,12 @@ class MetricDetailActivity : AppCompatActivity(), MetricDetailContract.MetricDet
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_metric_detail)
-        metricId = intent.getLongExtra(INTENT_EXTRA_METRIC_ID, -1)
-        presenter = MetricDetailPresenter(metricDataSource)
+        presenter = MetricDetailPresenter(this, metricDataSource)
+
+        val metricId = intent.getLongExtra(INTENT_EXTRA_METRIC_ID, -1L)
+
+        this.metricId = metricId
+        presenter.init(metricId)
 
         val toolbar = findViewById<Toolbar>(R.id.detail_metric_activity_tool_bar_xml)
 
@@ -31,7 +36,6 @@ class MetricDetailActivity : AppCompatActivity(), MetricDetailContract.MetricDet
         supportActionBar?.apply {
             setDisplayHomeAsUpEnabled(true)
             setHomeAsUpIndicator(R.drawable.ic_arrow_back_black)
-            title = getString(R.string.metric_detail_title, metricId.toString())
         }
     }
 
@@ -46,5 +50,22 @@ class MetricDetailActivity : AppCompatActivity(), MetricDetailContract.MetricDet
         else -> super.onOptionsItemSelected(item)
     }
 
+    // -- View interface
 
+    override fun updateActivityTitle(value: String) {
+        runOnUiThread {
+            supportActionBar?.apply {
+                title = getString(R.string.metric_detail_title, metricId.toString())
+
+            }
+        }
+    }
+
+    override fun updateData(value: MetricsWithRecord) {
+
+    }
+
+    override fun returnToMainWithError(errorId: String) {
+
+    }
 }
