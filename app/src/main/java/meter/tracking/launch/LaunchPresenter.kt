@@ -47,7 +47,7 @@ class LaunchPresenter(private val view: LaunchContract.View,
             Log.e(TAG, "Failed to insert test data", e)
         }
 
-        // Add a deplay to allow the user to see our wonder full splash screen ;)
+        // Add a delay to allow the user to see our wonder full splash screen ;)
         val disposable = initTestDataObservable.delay(1, TimeUnit.SECONDS)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
