@@ -22,7 +22,7 @@ interface MetricDao {
     @Query("SELECT id, name, value, measureLabel, historyFrequency FROM metric")
     fun getAll(): Single<List<Metric>>
 
-    @Query("SELECT metric.id, metric.name, metric.value, metric.measureLabel, historyFrequency FROM metric, metricRecord WHERE metric.id = :id")
+    @Query("SELECT id, name, value, measureLabel, historyFrequency FROM metric WHERE id = :id")
     fun get(id: Long): Maybe<MetricsWithRecord>
 
     @Insert

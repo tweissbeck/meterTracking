@@ -53,11 +53,8 @@ class MetricDetailActivity : AppCompatActivity(), MetricDetailContract.MetricDet
     // -- View interface
 
     override fun updateActivityTitle(value: String) {
-        runOnUiThread {
-            supportActionBar?.apply {
-                title = getString(R.string.metric_detail_title, metricId.toString())
-
-            }
+        supportActionBar?.apply {
+            title = getString(R.string.metric_detail_title, value)
         }
     }
 

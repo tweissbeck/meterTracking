@@ -3,11 +3,9 @@ package meter.tracking.metrics.detail
 import android.util.Log
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
-import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 import meter.tracking.datasource.MetricDataSource
 import meter.tracking.db.model.MetricsWithRecord
-import java.util.function.Consumer
 
 /**
  * @author tweissbeck
@@ -35,10 +33,12 @@ class MetricDetailPresenter(private val view: MetricDetailContract.MetricDetailV
         }
 
         val errorHandler: (Throwable) -> Unit = {
+            Log.i(TAG, "Metric loaded error", it)
             view.returnToMainWithError("") // TODO handle error message
         }
 
         val onCompleteHandler: () -> Unit = {
+            Log.i(TAG, "Metric completed")
             view.returnToMainWithError("") // TODO handle not found error message
         }
 
