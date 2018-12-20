@@ -33,16 +33,16 @@ class MetricDetailPresenter(private val view: MetricDetailContract.MetricDetailV
         }
 
         val errorHandler: (Throwable) -> Unit = {
-            Log.i(TAG, "Metric loaded error", it)
-            view.returnToMainWithError("") // TODO handle error message
+            Log.w(TAG, "Metric loaded error", it)
+            view.returnToMainWithError("error.get.metric.throwable", arrayOf(deviceId))
         }
 
         val onCompleteHandler: () -> Unit = {
             Log.i(TAG, "Metric completed")
-            view.returnToMainWithError("") // TODO handle not found error message
+            view.returnToMainWithError("error.get.metric.not.found", arrayOf(deviceId))
         }
 
-        if (deviceId != -1L) {
+        if (deviceId >= 0L) {
             val disposable = metricDataSource.getMetric(deviceId)
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribeOn(Schedulers.io())

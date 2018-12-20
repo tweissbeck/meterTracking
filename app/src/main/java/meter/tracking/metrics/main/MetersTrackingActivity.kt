@@ -38,6 +38,10 @@ class MetersTrackingActivity : AppCompatActivity(), MetricMainContract.View {
     private val metricRepository: MetricDataSource by inject()
     private val compositeDisposable = CompositeDisposable()
 
+    companion object {
+        const val DISPLAY_ERROR: String = "display_error_message"
+    }
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

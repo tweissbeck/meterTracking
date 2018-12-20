@@ -12,7 +12,7 @@ import org.koin.android.ext.android.inject
 
 /**
  * A standard launch activity with splash screen.
- * Using MVP pattern, init stuff is done into [LaunchPresenter]
+ * Using MVP pattern, init stuff is done in [LaunchPresenter]
  *
  * @author tweissbeck
  * @since 1.0.0

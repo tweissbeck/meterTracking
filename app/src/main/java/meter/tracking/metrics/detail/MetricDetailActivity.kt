@@ -1,5 +1,6 @@
 package meter.tracking.metrics.detail
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
@@ -8,6 +9,9 @@ import androidx.appcompat.widget.Toolbar
 import meter.tracking.R
 import meter.tracking.datasource.MetricDataSource
 import meter.tracking.db.model.MetricsWithRecord
+import meter.tracking.metrics.create.CreateNewMetricActivity
+import meter.tracking.metrics.main.MetersTrackingActivity
+import meter.tracking.util.LocalizedStringIdHelper
 import org.koin.android.ext.android.inject
 
 class MetricDetailActivity : AppCompatActivity(), MetricDetailContract.MetricDetailView {
@@ -62,7 +66,10 @@ class MetricDetailActivity : AppCompatActivity(), MetricDetailContract.MetricDet
 
     }
 
-    override fun returnToMainWithError(errorId: String) {
-
+    override fun returnToMainWithError(errorId: String, args: Array<Any>?) {
+        val intent = Intent(this, MetersTrackingActivity::class.java)
+        intent.putExtra(MetersTrackingActivity.DISPLAY_ERROR,
+                        LocalizedStringIdHelper.getLocalized(errorId, args, this.applicationContext))
+        startActivity(intent)
     }
 }

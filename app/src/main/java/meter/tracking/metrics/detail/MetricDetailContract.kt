@@ -13,6 +13,7 @@ interface MetricDetailContract {
     interface MetricDetailView : BaseView<MetricDetailPresenter> {
         /**
          * Update the activity title
+         * @param value the diplayed title
          */
         fun updateActivityTitle(value: String)
 
@@ -23,8 +24,10 @@ interface MetricDetailContract {
 
         /**
          * Return to main activity and display a toast with error message
+         * @param errorId the message key
+         * @param args message arguments, can be null
          */
-        fun returnToMainWithError(errorId: String)
+        fun returnToMainWithError(errorId: String, args: Array<Any>? = null)
     }
 
     interface MetricDetailPresenter : BasePresenter<MetricDetailView> {
