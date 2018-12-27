@@ -2,6 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="meter.tracking">
 
+    <!-- Used to reset alarm when device restart (aka notification) -->
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
+
     <application
         android:name=".MetricApp"
         android:allowBackup="true"
@@ -25,6 +28,15 @@
         <activity
             android:name=".metrics.detail.MetricDetailActivity"
             android:parentActivityName=".metrics.main.MetersTrackingActivity" />
+        <activity
+            android:name=".notification.config.NotificationConfigActivity"
+            android:parentActivityName=".metrics.main.MetersTrackingActivity" />
+        <receiver android:name="meter.tracking.notification.NotificationsBootReceiver"
+            android:enabled="false">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED"></action>
+            </intent-filter>
+        </receiver>
     </application>
 
 </manifest>

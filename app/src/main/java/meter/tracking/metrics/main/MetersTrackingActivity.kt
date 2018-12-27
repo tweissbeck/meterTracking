@@ -16,6 +16,7 @@ import meter.tracking.metrics.create.CreateNewMetricActivity
 import meter.tracking.datasource.MetricDataSource
 import meter.tracking.metrics.detail.MetricDetailActivity
 import meter.tracking.metrics.main.view.MetricAdapter
+import meter.tracking.notification.config.NotificationConfigActivity
 import org.koin.android.ext.android.inject
 
 /**
@@ -33,7 +34,7 @@ class MetersTrackingActivity : AppCompatActivity(), MetricMainContract.View {
     override lateinit var presenter: MetricMainContract.Presenter
 
     /**
-     * [MetricRepository] loaded from Koin di
+     * [meter.tracking.datasource.MetricRepository] loaded from Koin di
      */
     private val metricRepository: MetricDataSource by inject()
     private val compositeDisposable = CompositeDisposable()
@@ -75,6 +76,11 @@ class MetersTrackingActivity : AppCompatActivity(), MetricMainContract.View {
     override fun onOptionsItemSelected(item: MenuItem): Boolean = when (item.itemId) {
         R.id.action_new_metric -> {
             val intent = Intent(this, CreateNewMetricActivity::class.java)
+            startActivity(intent)
+            true
+        }
+        R.id.action_settings -> {
+            val intent = Intent(this, NotificationConfigActivity::class.java)
             startActivity(intent)
             true
         }

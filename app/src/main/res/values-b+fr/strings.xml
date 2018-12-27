@@ -23,4 +23,12 @@
 
     <string name="metric_detail_title">Compteur : %s</string>
 
+    <!-- Channel -->
+    <string name="default_channel_label"></string>
+    <string name="default_channel_description"></string>
+
+    <!-- Notification -->
+    <string name="notification_metric_to_fill_remind_title">Missing value for metric %s</string>
+    <string name="notification_metric_to_fill_remind_text">A value is missing for metric %s. Please complete it for current period. Frequency set to %s.</string>
+
 </resources>
