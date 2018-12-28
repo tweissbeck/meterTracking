@@ -1,6 +1,7 @@
 package meter.tracking.metrics.create
 
 import meter.tracking.BaseView
+import meter.tracking.db.model.HistoryFrequency
 
 /**
  * @author tweissbeck
@@ -9,11 +10,15 @@ import meter.tracking.BaseView
 interface CreateMetricContract {
 
     interface View : BaseView<Presenter> {
-        fun showMetricListWithResult(message: String)
-        fun showMetricListWithError(error: String)
+        fun navigateToMetricsListWithNewMetricAdded(metricName: String)
+        fun navigateToMetricsListWithError(error: String)
+        fun displayEmptyNameError()
+        fun displayEmptyFrequency()
+        fun displayEmptyUnit()
+        fun navigateToMetricsList()
     }
 
     interface Presenter{
-        fun createMetric(m:MetricDTO)
+        fun createMetric(name: String?, historyFrequency: HistoryFrequency?, unit: String?)
     }
 }

@@ -30,5 +30,8 @@
     <!-- Notification -->
     <string name="notification_metric_to_fill_remind_title">Missing value for metric %s</string>
     <string name="notification_metric_to_fill_remind_text">A value is missing for metric %s. Please complete it for current period. Frequency set to %s.</string>
+    <string name="error_empty_edit_text">This field is required</string>
+    <string name="toast_new_metric_added">New metric named %s added</string>
+    <string name="toast_new_metric_error">An error ocurred while creating new metric: %s</string>
 
 </resources>

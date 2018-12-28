@@ -17,7 +17,7 @@ import kotlin.math.sin
 class MetricRepository(private val metricDao: MetricDao) : MetricDataSource {
     override fun saveMetric(dto: MetricDTO): Single<Long> {
         val singleEmitter = SingleOnSubscribe<Long> {
-            metricDao.insert(Metric(dto.name, 0, dto.unit, HistoryFrequency.MONTHLY))
+            metricDao.insert(Metric(dto.name, 0, dto.unit, dto.type))
         }
         return Single.create(singleEmitter)
         //return metricDao.insert(Metric(dto.name, 0, dto.unit, HistoryFrequency.MONTHLY))

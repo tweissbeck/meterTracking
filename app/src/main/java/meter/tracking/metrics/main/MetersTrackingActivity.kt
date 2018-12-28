@@ -41,6 +41,7 @@ class MetersTrackingActivity : AppCompatActivity(), MetricMainContract.View {
 
     companion object {
         const val DISPLAY_ERROR: String = "display_error_message"
+        const val TOAST_MESSAGE: String = "display_toast"
     }
 
 
