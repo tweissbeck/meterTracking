@@ -9,8 +9,8 @@ import androidx.appcompat.widget.Toolbar
 import meter.tracking.R
 import meter.tracking.datasource.MetricDataSource
 import meter.tracking.db.model.MetricsWithRecord
-import meter.tracking.metrics.create.CreateNewMetricActivity
 import meter.tracking.metrics.main.MetersTrackingActivity
+import meter.tracking.rx.SchedulerProvider
 import meter.tracking.util.LocalizedStringIdHelper
 import org.koin.android.ext.android.inject
 
@@ -22,17 +22,18 @@ class MetricDetailActivity : AppCompatActivity(), MetricDetailContract.MetricDet
 
     override lateinit var presenter: MetricDetailContract.MetricDetailPresenter
     private val metricDataSource: MetricDataSource by inject()
+    private val schedulerProvider: SchedulerProvider by inject()
     private var metricId: Long? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_metric_detail)
-        presenter = MetricDetailPresenter(this, metricDataSource)
+        presenter = MetricDetailPresenter(this, this.metricDataSource, this.schedulerProvider)
 
         val metricId = intent.getLongExtra(INTENT_EXTRA_METRIC_ID, -1L)
 
         this.metricId = metricId
-        presenter.init(metricId)
+        this.presenter.init(metricId)
 
         val toolbar = findViewById<Toolbar>(R.id.detail_metric_activity_tool_bar_xml)
 

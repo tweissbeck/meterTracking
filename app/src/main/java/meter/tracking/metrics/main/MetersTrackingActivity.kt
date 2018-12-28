@@ -17,6 +17,7 @@ import meter.tracking.datasource.MetricDataSource
 import meter.tracking.metrics.detail.MetricDetailActivity
 import meter.tracking.metrics.main.view.MetricAdapter
 import meter.tracking.notification.config.NotificationConfigActivity
+import meter.tracking.rx.SchedulerProvider
 import org.koin.android.ext.android.inject
 
 /**
@@ -30,6 +31,7 @@ class MetersTrackingActivity : AppCompatActivity(), MetricMainContract.View {
     private lateinit var recyclerView: RecyclerView
     private lateinit var viewAdapter: MetricAdapter
     private lateinit var viewManager: RecyclerView.LayoutManager
+    private val schedulerProvider: SchedulerProvider by inject()
 
     override lateinit var presenter: MetricMainContract.Presenter
 
@@ -62,8 +64,8 @@ class MetersTrackingActivity : AppCompatActivity(), MetricMainContract.View {
             viewAdapter.setUpData(result)
         }
         val disposable = metricRepository.getMetrics()
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(schedulerProvider.io())
+                .observeOn(schedulerProvider.ui())
                 .subscribe(success)
         this.compositeDisposable.add(disposable)
     }

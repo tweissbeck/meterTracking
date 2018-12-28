@@ -2,21 +2,16 @@ package meter.tracking.launch
 
 import android.util.Log
 import io.reactivex.Completable
-import io.reactivex.Observable
-import io.reactivex.Single
-import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
-import io.reactivex.functions.Action
-import io.reactivex.internal.operators.completable.CompletableEmpty
 import io.reactivex.internal.operators.single.SingleJust
 import io.reactivex.schedulers.Schedulers
 import meter.tracking.datasource.MeasuringTypeDataSource
-import meter.tracking.db.model.Metric
-import meter.tracking.metrics.main.MetersTrackingActivity
 import meter.tracking.datasource.MetricDataSource
 import meter.tracking.db.model.HistoryFrequency
 import meter.tracking.db.model.MeasuringType
-import java.util.*
+import meter.tracking.db.model.Metric
+import meter.tracking.metrics.main.MetersTrackingActivity
+import meter.tracking.rx.SchedulerProvider
 import java.util.concurrent.TimeUnit
 
 
@@ -27,10 +22,11 @@ import java.util.concurrent.TimeUnit
  */
 class LaunchPresenter(private val view: LaunchContract.View,
                       private val metricsDataSource: MetricDataSource,
-                      private val measuringDataSource: MeasuringTypeDataSource) : LaunchContract.Presenter {
+                      private val measuringDataSource: MeasuringTypeDataSource,
+                      private val schedulerProvider: SchedulerProvider) : LaunchContract.Presenter {
 
     companion object {
-        internal val TAG: String = "LaunchPresenter"
+        internal const val TAG: String = "LaunchPresenter"
     }
 
     private val compositeDisposable: CompositeDisposable = CompositeDisposable()
@@ -49,8 +45,8 @@ class LaunchPresenter(private val view: LaunchContract.View,
 
         // Add a delay to allow the user to see our wonder full splash screen ;)
         val disposable = initTestDataObservable.delay(1, TimeUnit.SECONDS)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
+                .observeOn(schedulerProvider.ui())
+                .subscribeOn(schedulerProvider.io())
                 .subscribe(onComplete(), onError())
         this.compositeDisposable.add(disposable)
     }
@@ -101,7 +97,7 @@ class LaunchPresenter(private val view: LaunchContract.View,
                         Metric("Water", 1420, "Litre", HistoryFrequency.MONTHLY).apply { this.id = id++ },
                         Metric("Elec", 142078, "Watt", HistoryFrequency.MONTHLY).apply { this.id = id++ },
                         Metric("CAR 1", 1420, "Kilometreage", HistoryFrequency.MONTHLY).apply { this.id = id++ }
-                )).flatMap { _ -> SingleJust(Unit) }
+                )).flatMap { SingleJust(Unit) }
             } else {
                 SingleJust(Unit)
             }

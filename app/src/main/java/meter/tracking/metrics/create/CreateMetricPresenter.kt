@@ -1,17 +1,17 @@
 package meter.tracking.metrics.create
 
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.schedulers.Schedulers
+import io.reactivex.disposables.CompositeDisposable
 import meter.tracking.datasource.MetricDataSource
 import meter.tracking.db.model.HistoryFrequency
-import io.reactivex.disposables.CompositeDisposable
+import meter.tracking.rx.SchedulerProvider
 
 
 /**
  * @author tweissbeck
  * @since 1.0.0
  */
-class CreateMetricPresenter(private val view: CreateMetricContract.View, private val repo: MetricDataSource) :
+class CreateMetricPresenter(private val view: CreateMetricContract.View, private val repo: MetricDataSource,
+                            private val schedulerProvider: SchedulerProvider) :
         CreateMetricContract.Presenter {
 
     private val mCompositeDisposable = CompositeDisposable()
@@ -41,12 +41,12 @@ class CreateMetricPresenter(private val view: CreateMetricContract.View, private
         // Save the new metric
         if (!error) {
             val metric = MetricDTO(name!!, historyFrequency!!, unit!!)
-            val successHandler = { id: Long -> view.navigateToMetricsListWithNewMetricAdded(name) }
+            val successHandler: (Long) -> Unit = { view.navigateToMetricsListWithNewMetricAdded(name) }
             val errorHandler = { e: Throwable -> view.navigateToMetricsListWithError(e.message ?: "new.metric.error") }
 
             val closeable = repo.saveMetric(metric)
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribeOn(Schedulers.io())
+                    .observeOn(schedulerProvider.ui())
+                    .subscribeOn(schedulerProvider.io())
                     .subscribe(successHandler, errorHandler)
             mCompositeDisposable.add(closeable)
         } else {

@@ -6,13 +6,15 @@ import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 import meter.tracking.datasource.MetricDataSource
 import meter.tracking.db.model.MetricsWithRecord
+import meter.tracking.rx.SchedulerProvider
 
 /**
  * @author tweissbeck
  * @since 1.0.0
  */
 class MetricDetailPresenter(private val view: MetricDetailContract.MetricDetailView,
-                            private val metricDataSource: MetricDataSource) :
+                            private val metricDataSource: MetricDataSource,
+                            private val schedulerProvider: SchedulerProvider) :
         MetricDetailContract.MetricDetailPresenter {
 
     companion object {
@@ -43,9 +45,9 @@ class MetricDetailPresenter(private val view: MetricDetailContract.MetricDetailV
         }
 
         if (deviceId >= 0L) {
-            val disposable = metricDataSource.getMetric(deviceId)
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribeOn(Schedulers.io())
+            val disposable = this.metricDataSource.getMetric(deviceId)
+                    .observeOn(this.schedulerProvider.ui())
+                    .subscribeOn(this.schedulerProvider.io())
                     .subscribe(successHandler, errorHandler, onCompleteHandler)
             this.disposables.add(disposable)
         } else {
