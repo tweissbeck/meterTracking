@@ -8,6 +8,7 @@ import meter.tracking.R
 import meter.tracking.datasource.MeasuringTypeDataSource
 import meter.tracking.metrics.main.MetersTrackingActivity
 import meter.tracking.datasource.MetricDataSource
+import meter.tracking.rx.SchedulerProvider
 import org.koin.android.ext.android.inject
 
 /**
@@ -22,13 +23,14 @@ class LaunchActivity : AppCompatActivity(), LaunchContract.View {
     override lateinit var presenter: LaunchContract.Presenter
     private val metricDateSource: MetricDataSource by inject()
     private val measuringTypeDataSource: MeasuringTypeDataSource by inject()
+    private val schedulerProvider: SchedulerProvider by inject()
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_launch)
 
-        presenter = LaunchPresenter(this, metricDateSource, measuringTypeDataSource)
+        presenter = LaunchPresenter(this, metricDateSource, measuringTypeDataSource, schedulerProvider)
         presenter.init()
     }
 

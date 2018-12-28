@@ -15,6 +15,7 @@ import meter.tracking.datasource.MetricDataSource
 import meter.tracking.db.model.HistoryFrequency
 import meter.tracking.metrics.main.MetersTrackingActivity
 import meter.tracking.metrics.main.MetersTrackingActivity.Companion.TOAST_MESSAGE
+import meter.tracking.rx.SchedulerProvider
 import org.koin.android.ext.android.inject
 
 /**
@@ -25,6 +26,7 @@ class CreateNewMetricActivity : AppCompatActivity(), CreateMetricContract.View {
     override lateinit var presenter: CreateMetricContract.Presenter
 
     private val metricDataSource: MetricDataSource by inject()
+    private val schedulerProvider: SchedulerProvider by inject()
 
     private lateinit var nameEditText: EditText
     private lateinit var unitSpinner: Spinner
@@ -34,7 +36,7 @@ class CreateNewMetricActivity : AppCompatActivity(), CreateMetricContract.View {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        this.presenter = CreateMetricPresenter(this, metricDataSource)
+        this.presenter = CreateMetricPresenter(this, metricDataSource, schedulerProvider)
 
         setContentView(R.layout.activity_create_new_metric)
 
