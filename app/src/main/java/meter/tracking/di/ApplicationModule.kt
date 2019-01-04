@@ -7,6 +7,7 @@ import meter.tracking.db.dao.MetricDao
 import meter.tracking.datasource.MetricDataSource
 import meter.tracking.datasource.MetricRepository
 import meter.tracking.db.dao.MeasuringTypeDao
+import meter.tracking.rx.AndroidSchedulerProvider
 import meter.tracking.rx.SchedulerProvider
 import org.koin.dsl.module.module
 
@@ -19,7 +20,7 @@ object ApplicationModule {
         single { Room.databaseBuilder(get(), MetricsDataBase::class.java, "metric_base").build() }
         single<MetricDataSource> { MetricRepository(getMetricDAO(get())) }
         single<MeasuringTypeDataSource> { getMeasuringTypeDAO(get()) }
-        single<SchedulerProvider> {get()}
+        single<SchedulerProvider> { AndroidSchedulerProvider(get()) }
     }
 
     private fun getMetricDAO(db: MetricsDataBase): MetricDao = db.metricDao
