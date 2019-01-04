@@ -24,8 +24,8 @@
     <string name="metric_detail_title">Compteur : %s</string>
 
     <!-- Channel -->
-    <string name="default_channel_label"></string>
-    <string name="default_channel_description"></string>
+    <string name="default_channel_label">Metrics tracking channel</string>
+    <string name="default_channel_description">Receive notifications when a metric need to be filled</string>
 
     <!-- Notification -->
     <string name="notification_metric_to_fill_remind_title">Missing value for metric %s</string>
