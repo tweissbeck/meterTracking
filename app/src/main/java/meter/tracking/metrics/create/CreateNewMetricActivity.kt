@@ -10,9 +10,12 @@ import android.widget.Spinner
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
+import io.reactivex.disposables.CompositeDisposable
 import meter.tracking.R
+import meter.tracking.datasource.MeasuringTypeDataSource
 import meter.tracking.datasource.MetricDataSource
 import meter.tracking.db.model.HistoryFrequency
+import meter.tracking.db.model.MeasuringType
 import meter.tracking.metrics.main.MetersTrackingActivity
 import meter.tracking.metrics.main.MetersTrackingActivity.Companion.TOAST_MESSAGE
 import meter.tracking.rx.SchedulerProvider
@@ -26,7 +29,9 @@ class CreateNewMetricActivity : AppCompatActivity(), CreateMetricContract.View {
     override lateinit var presenter: CreateMetricContract.Presenter
 
     private val metricDataSource: MetricDataSource by inject()
+    private val measuringTypeSource: MeasuringTypeDataSource by inject()
     private val schedulerProvider: SchedulerProvider by inject()
+    private val compositeDisposable = CompositeDisposable()
 
     private lateinit var nameEditText: EditText
     private lateinit var unitSpinner: Spinner
@@ -35,15 +40,16 @@ class CreateNewMetricActivity : AppCompatActivity(), CreateMetricContract.View {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_create_new_metric)
 
         this.presenter = CreateMetricPresenter(this, metricDataSource, schedulerProvider)
 
-        setContentView(R.layout.activity_create_new_metric)
-
+        // Get form fields
         this.nameEditText = findViewById(R.id.metric_name)
         this.frequencySpinner = findViewById(R.id.metric_type)
         this.unitSpinner = findViewById(R.id.metric_unit)
 
+        // Menu
         val toolbar = findViewById<Toolbar>(R.id.create_metric_activity_toolbar)
         setSupportActionBar(toolbar)
         supportActionBar?.apply {
@@ -52,11 +58,33 @@ class CreateNewMetricActivity : AppCompatActivity(), CreateMetricContract.View {
             title = getString(R.string.action_new)
         }
 
-        val spinner: Spinner = findViewById(R.id.metric_type)
+        // Setup adapter for frequency spinner
         FrequencyAdapter(this).apply {
             setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-            spinner.adapter = this
+            frequencySpinner.adapter = this
         }
+
+        // Setup adapter for measuring type spinner
+        val metricAdapter = MetricUnitAdapter(this).apply {
+            setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+            unitSpinner.adapter = this
+        }
+        val loadMetricUnitHandler = { result: List<MeasuringType> ->
+            metricAdapter.clear()
+            metricAdapter.addAll(result.map { measuringType -> measuringType.label })
+            metricAdapter.notifyDataSetChanged()
+        }
+        // Launch async jobs to fill the measuring type spinner from data base
+        val disposable = this.measuringTypeSource.getAll()
+                .subscribeOn(schedulerProvider.io())
+                .observeOn(schedulerProvider.ui())
+                .subscribe(loadMetricUnitHandler)
+        this.compositeDisposable.add(disposable)
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        this.compositeDisposable.dispose()
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -66,12 +94,12 @@ class CreateNewMetricActivity : AppCompatActivity(), CreateMetricContract.View {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean = when (item.itemId) {
         R.id.action_new_metric_save -> {
-            val selectedFrequency: HistoryFrequency? = if (this.frequencySpinner.isSelected) {
+            val selectedFrequency: HistoryFrequency? = if (this.frequencySpinner.selectedItem != null) {
                 this.frequencySpinner.selectedItem as HistoryFrequency
             } else {
                 null
             }
-            val selectedUnit: String? = if (this.unitSpinner.isSelected) {
+            val selectedUnit: String? = if (this.unitSpinner.selectedItem != null) {
                 this.unitSpinner.selectedItem as String
             } else {
                 null

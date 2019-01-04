@@ -14,14 +14,14 @@ import meter.tracking.db.model.MeasuringType
  * @since 1.0.0
  */
 @Dao
-interface MeasuringTypeDao: MeasuringTypeDataSource {
+interface MeasuringTypeDao {
 
     @Query("SELECT label, decimal, unitSymbol FROM MeasuringType")
-    override fun getAll(): Single<List<MeasuringType>>
+    fun getAll(): Single<List<MeasuringType>>
 
     @Insert
-    override fun insert(tuple: MeasuringType): Long
+    fun insert(tuple: MeasuringType): Long
 
     @Insert
-    override fun insertAll(tuples: Array<MeasuringType>): List<Long>
+    fun insertAll(tuples: Array<MeasuringType>): List<Long>
 }

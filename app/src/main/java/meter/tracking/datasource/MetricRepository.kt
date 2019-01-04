@@ -4,11 +4,9 @@ import io.reactivex.Maybe
 import io.reactivex.Single
 import io.reactivex.SingleOnSubscribe
 import meter.tracking.db.dao.MetricDao
-import meter.tracking.db.model.HistoryFrequency
 import meter.tracking.db.model.Metric
 import meter.tracking.db.model.MetricsWithRecord
 import meter.tracking.metrics.create.MetricDTO
-import kotlin.math.sin
 
 /**
  * @author tweissbeck
@@ -20,7 +18,6 @@ class MetricRepository(private val metricDao: MetricDao) : MetricDataSource {
             metricDao.insert(Metric(dto.name, 0, dto.unit, dto.type))
         }
         return Single.create(singleEmitter)
-        //return metricDao.insert(Metric(dto.name, 0, dto.unit, HistoryFrequency.MONTHLY))
     }
 
     override fun saveMetrics(metrics: Array<Metric>): Single<List<Long>> {

@@ -4,6 +4,7 @@ import io.reactivex.disposables.CompositeDisposable
 import meter.tracking.datasource.MetricDataSource
 import meter.tracking.db.model.HistoryFrequency
 import meter.tracking.rx.SchedulerProvider
+import meter.tracking.util.StringUtil
 
 
 /**
@@ -18,7 +19,7 @@ class CreateMetricPresenter(private val view: CreateMetricContract.View, private
 
     override fun createMetric(name: String?, historyFrequency: HistoryFrequency?, unit: String?) {
         // All field are empty, just return to the metrics list without error
-        if (name == null && historyFrequency == null && unit == null) {
+        if (StringUtil.isEmpty(name) && historyFrequency == null && StringUtil.isEmpty(unit)) {
             view.navigateToMetricsList()
         }
 
@@ -50,7 +51,7 @@ class CreateMetricPresenter(private val view: CreateMetricContract.View, private
                     .subscribe(successHandler, errorHandler)
             mCompositeDisposable.add(closeable)
         } else {
-
+            // TODO
         }
     }
 }

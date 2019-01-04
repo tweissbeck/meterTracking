@@ -12,8 +12,8 @@ interface MeasuringTypeDataSource {
     fun getAll(): Single<List<MeasuringType>>
 
 
-    fun insert(tuple: MeasuringType): Long
+    fun insert(tuple: MeasuringType): Single<Long>
 
 
-    fun insertAll(tuples: Array<MeasuringType>): List<Long>
+    fun insertAll(tuples: Array<MeasuringType>): Single<List<Long>>
 }
