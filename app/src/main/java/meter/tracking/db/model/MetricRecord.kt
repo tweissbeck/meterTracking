@@ -3,6 +3,7 @@ package meter.tracking.db.model
 import androidx.room.Entity
 import androidx.room.ForeignKey
 import androidx.room.PrimaryKey
+import java.time.LocalDate
 
 /**
  * @author tweissbeck
@@ -11,4 +12,4 @@ import androidx.room.PrimaryKey
 @Entity(tableName = "metricRecord",
         foreignKeys = [(ForeignKey(entity = Metric::class, parentColumns = arrayOf("id"),
                                    childColumns = arrayOf("metric")))])
-class MetricRecord(@PrimaryKey val id: Long, val metric: Long, val value: Long, val date: String)
+class MetricRecord(@PrimaryKey val id: Long, val metric: Long, val value: Long, val date: LocalDate)

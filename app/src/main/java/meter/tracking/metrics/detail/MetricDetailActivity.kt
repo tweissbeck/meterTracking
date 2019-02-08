@@ -6,14 +6,21 @@ import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
+import androidx.recyclerview.widget.RecyclerView
 import meter.tracking.R
 import meter.tracking.datasource.MetricDataSource
+import meter.tracking.db.model.HistoryFrequency
 import meter.tracking.db.model.MetricsWithRecord
 import meter.tracking.metrics.main.MetersTrackingActivity
 import meter.tracking.rx.SchedulerProvider
 import meter.tracking.util.LocalizedStringIdHelper
 import org.koin.android.ext.android.inject
+import java.time.LocalDate
+import java.time.temporal.ChronoUnit.DAYS
 
+/**
+ * Display metric detail
+ */
 class MetricDetailActivity : AppCompatActivity(), MetricDetailContract.MetricDetailView {
 
     companion object {
@@ -25,10 +32,16 @@ class MetricDetailActivity : AppCompatActivity(), MetricDetailContract.MetricDet
     private val schedulerProvider: SchedulerProvider by inject()
     private var metricId: Long? = null
 
+
+    private lateinit var viewManager: RecyclerView.LayoutManager
+    private lateinit var recyclerView: RecyclerView
+    private lateinit var viewAdapter: MetricDetailAdapter
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_metric_detail)
-        presenter = MetricDetailPresenter(this, this.metricDataSource, this.schedulerProvider)
+        this.presenter = MetricDetailPresenter(this, this.metricDataSource, this.schedulerProvider)
 
         val metricId = intent.getLongExtra(INTENT_EXTRA_METRIC_ID, -1L)
 
@@ -38,9 +51,16 @@ class MetricDetailActivity : AppCompatActivity(), MetricDetailContract.MetricDet
         val toolbar = findViewById<Toolbar>(R.id.detail_metric_activity_tool_bar_xml)
 
         setSupportActionBar(toolbar)
-        supportActionBar?.apply {
+        this.supportActionBar?.apply {
             setDisplayHomeAsUpEnabled(true)
             setHomeAsUpIndicator(R.drawable.ic_arrow_back_black)
+        }
+
+        // Bind recycler view
+        this.viewAdapter = MetricDetailAdapter()
+        recyclerView = findViewById<RecyclerView>(R.id.metrics_detail_record_list).apply {
+            layoutManager = viewManager
+            adapter = viewAdapter
         }
     }
 
@@ -63,7 +83,29 @@ class MetricDetailActivity : AppCompatActivity(), MetricDetailContract.MetricDet
         }
     }
 
-    override fun updateData(value: MetricsWithRecord) {
+    override fun updateData(data: MetricsWithRecord) {
+        /**
+         * Return true if the metric is up to date.
+         * A metric is update when its last record date is in time with its [HistoryFrequency]
+         */
+        fun isMetricUpdateToDate(): Boolean {
+            val lastRecord = data.records.first()
+            val recordDate = lastRecord.date
+            val now = LocalDate.now()
+            return when (data.historyFrequency) {
+                HistoryFrequency.DAILY -> now.isEqual(recordDate)
+                HistoryFrequency.WEEKLY -> DAYS.between(recordDate, now) < 8
+                HistoryFrequency.MONTHLY -> DAYS.between(recordDate, now) < 31
+                HistoryFrequency.ANNUAL -> DAYS.between(recordDate, now) < 366
+            }
+        }
+
+        val metricUpToDate: Boolean = isMetricUpdateToDate()
+        val average: Long = data.value / data.records.size
+
+        this.viewAdapter.setData(data.records)
+
+
 
     }
 

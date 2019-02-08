@@ -8,7 +8,7 @@ android {
     compileSdkVersion 28
     defaultConfig {
         applicationId "meter.tracking"
-        minSdkVersion 24
+        minSdkVersion 26
         targetSdkVersion 28
         versionCode 1
         versionName "1.0"
@@ -49,6 +49,14 @@ dependencies {
 
     // Notification
     implementation "com.android.support:support-compat:28.0.0"
+
+    // Work manager see https://developer.android.com/jetpack/androidx/releases/work
+    def work_version = "1.0.0-beta05"
+    implementation "android.arch.work:work-runtime:$work_version" // For Kotlin+Coroutines use work-runtime-ktx
+    // optional - RxJava2 support
+    implementation "android.arch.work:work-rxjava2:$work_version"
+    // optional - Test helpers
+    androidTestImplementation "android.arch.work:work-testing:$work_version"
 
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test:runner:1.1.1'

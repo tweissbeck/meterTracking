@@ -20,7 +20,7 @@ interface MetricDetailContract {
         /**
          * Update metric fields
          */
-        fun updateData(value: MetricsWithRecord)
+        fun updateData(data: MetricsWithRecord)
 
         /**
          * Return to main activity and display a toast with error message

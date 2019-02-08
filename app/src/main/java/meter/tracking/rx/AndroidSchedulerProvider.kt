@@ -6,6 +6,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 
 /**
+ * Android implementation of [SchedulerProvider]
  * @author tweissbeck
  * @since 1.0.0
  */
