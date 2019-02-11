@@ -33,5 +33,7 @@
     <string name="error_empty_edit_text">This field is required</string>
     <string name="toast_new_metric_added">New metric named %s added</string>
     <string name="toast_new_metric_error">An error occurred while creating new metric: %s</string>
+    <string name="detail_total_label">Total</string>
+    <string name="detail_last_value_label">Dernier valeur</string>
 
 </resources>

@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.recyclerview.widget.RecyclerView
@@ -37,6 +38,8 @@ class MetricDetailActivity : AppCompatActivity(), MetricDetailContract.MetricDet
     private lateinit var recyclerView: RecyclerView
     private lateinit var viewAdapter: MetricDetailAdapter
 
+    private lateinit var totalTextView: TextView
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -62,6 +65,9 @@ class MetricDetailActivity : AppCompatActivity(), MetricDetailContract.MetricDet
             layoutManager = viewManager
             adapter = viewAdapter
         }
+
+        // Bind texts views
+        this.totalTextView = findViewById(R.id.detail_total_value)
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -106,6 +112,11 @@ class MetricDetailActivity : AppCompatActivity(), MetricDetailContract.MetricDet
         this.viewAdapter.setData(data.records)
 
 
+        // Now update the view
+        this.totalTextView.text = data.value.toString()
+        if(metricUpToDate){
+
+        }
 
     }
 
