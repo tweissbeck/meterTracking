@@ -1,10 +1,11 @@
 package meter.tracking.util
 
 /**
+ * An abstract kotlin singleton
  * @author tweissbeck
  * @since 1.0.0
  */
-open class Singleton<out T, in A>(private val create: (A) -> T) {
+open abstract class Singleton<out T, in A>(private val create: (A) -> T) {
 
     @Volatile
     private var instance: T? = null
