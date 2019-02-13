@@ -3,7 +3,6 @@ package meter.tracking.metrics.main.view
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.LinearLayout
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import meter.tracking.R
 import meter.tracking.db.model.Metric
@@ -17,7 +16,7 @@ import meter.tracking.metrics.main.MetricRecyclerViewPresenter
 class MetricAdapter(private val presenter: MetricRecyclerViewPresenter) : RecyclerView.Adapter<MetricViewHolder>() {
 
 
-    val data: MutableList<Metric> = mutableListOf()
+    private val data: MutableList<Metric> = mutableListOf()
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MetricViewHolder {
         val layout = LayoutInflater.from(parent.context).inflate(R.layout.metric_list_view_item, parent,
                                                                  false) as LinearLayout
@@ -42,15 +41,8 @@ class MetricAdapter(private val presenter: MetricRecyclerViewPresenter) : Recycl
 
     // Replace the contents of a view (invoked by the layout manager)
     override fun onBindViewHolder(holder: MetricViewHolder, position: Int) {
-
         val currentMetric = data[position]
-        val name = holder.layout.findViewById(R.id.metric_list_view_item_name) as TextView
-        val value = holder.layout.findViewById(R.id.metric_list_view_item_value) as TextView
-        val unit = holder.layout.findViewById(R.id.metric_list_view_item_unit) as TextView
-
-        name.text = currentMetric.name
-        value.text = currentMetric.value.toString()
-        unit.text = currentMetric.measureLabel
+        holder.update(currentMetric)
     }
 
 }
