@@ -5,6 +5,7 @@ import meter.tracking.datasource.MetricDataSource
 import meter.tracking.db.model.HistoryFrequency
 import meter.tracking.rx.SchedulerProvider
 import meter.tracking.util.StringUtil
+import java.time.LocalDate
 
 
 /**
@@ -41,7 +42,7 @@ class CreateMetricPresenter(private val view: CreateMetricContract.View, private
 
         // Save the new metric
         if (!error) {
-            val metric = MetricDTO(name!!, historyFrequency!!, unit!!)
+            val metric = MetricDTO(name!!, historyFrequency!!, unit!!, LocalDate.now())
             val successHandler: (Long) -> Unit = { view.navigateToMetricsListWithNewMetricAdded(name) }
             val errorHandler = { e: Throwable -> view.navigateToMetricsListWithError(e.message ?: "new.metric.error") }
 

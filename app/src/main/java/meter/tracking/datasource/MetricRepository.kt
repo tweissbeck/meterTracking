@@ -15,7 +15,7 @@ import meter.tracking.metrics.create.MetricDTO
 class MetricRepository(private val metricDao: MetricDao) : MetricDataSource {
     override fun saveMetric(dto: MetricDTO): Single<Long> {
         val singleEmitter = SingleOnSubscribe<Long> {
-            metricDao.insert(Metric(dto.name, 0, dto.unit, dto.type))
+            metricDao.insert(Metric(dto.name, 0, dto.unit, dto.type, dto.startDate))
         }
         return Single.create(singleEmitter)
     }

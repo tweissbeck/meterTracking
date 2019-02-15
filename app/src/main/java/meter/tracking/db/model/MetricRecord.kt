@@ -6,6 +6,10 @@ import androidx.room.PrimaryKey
 import java.time.LocalDate
 
 /**
+ * @param id
+ * @param metric
+ * @param value
+ * @param date
  * @author tweissbeck
  * @since 1.0.0
  */

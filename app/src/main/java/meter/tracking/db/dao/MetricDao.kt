@@ -19,10 +19,10 @@ import meter.tracking.db.model.MetricsWithRecord
 @Dao
 interface MetricDao {
 
-    @Query("SELECT id, name, value, measureLabel, historyFrequency FROM metric")
+    @Query("SELECT id, name, value, measureLabel, historyFrequency, startDate FROM metric")
     fun getAll(): Single<List<Metric>>
 
-    @Query("SELECT id, name, value, measureLabel, historyFrequency FROM metric WHERE id = :id")
+    @Query("SELECT id, name, value, measureLabel, historyFrequency, startDate FROM metric WHERE id = :id")
     fun get(id: Long): Maybe<MetricsWithRecord>
 
     @Insert

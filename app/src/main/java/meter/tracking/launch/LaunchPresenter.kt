@@ -12,6 +12,7 @@ import meter.tracking.db.model.MeasuringType
 import meter.tracking.db.model.Metric
 import meter.tracking.metrics.main.MetersTrackingActivity
 import meter.tracking.rx.SchedulerProvider
+import java.time.LocalDate
 import java.util.concurrent.TimeUnit
 
 
@@ -77,26 +78,26 @@ class LaunchPresenter(private val view: LaunchContract.View,
             if (t.isEmpty()) {
                 var id = 0L
                 metricsDataSource.saveMetrics(arrayOf(
-                        Metric("CAR 1", 1420, "Kilometreage", HistoryFrequency.MONTHLY).apply { this.id = id++ },
-                        Metric("CAR 2", 15874, "Kilometreage", HistoryFrequency.MONTHLY).apply { this.id = id++ },
-                        Metric("Water", 1420, "Litre", HistoryFrequency.MONTHLY).apply { this.id = id++ },
-                        Metric("Elec", 142078, "Watt", HistoryFrequency.MONTHLY).apply { this.id = id++ },
-                        Metric("CAR 1", 1420, "Kilometreage", HistoryFrequency.MONTHLY).apply { this.id = id++ },
-                        Metric("CAR 1", 1420, "Kilometreage", HistoryFrequency.MONTHLY).apply { this.id = id++ },
-                        Metric("CAR 2", 15874, "Kilometreage", HistoryFrequency.MONTHLY).apply { this.id = id++ },
-                        Metric("Water", 1420, "Litre", HistoryFrequency.MONTHLY).apply { this.id = id++ },
-                        Metric("Elec", 142078, "Watt", HistoryFrequency.MONTHLY).apply { this.id = id++ },
-                        Metric("CAR 1", 1420, "Kilometreage", HistoryFrequency.MONTHLY).apply { this.id = id++ },
-                        Metric("CAR 1", 1420, "Kilometreage", HistoryFrequency.MONTHLY).apply { this.id = id++ },
-                        Metric("CAR 2", 15874, "Kilometreage", HistoryFrequency.MONTHLY).apply { this.id = id++ },
-                        Metric("Water", 1420, "Litre", HistoryFrequency.MONTHLY).apply { this.id = id++ },
-                        Metric("Elec", 142078, "Watt", HistoryFrequency.MONTHLY).apply { this.id = id++ },
-                        Metric("CAR 1", 1420, "Kilometreage", HistoryFrequency.MONTHLY).apply { this.id = id++ },
-                        Metric("CAR 1", 1420, "Kilometreage", HistoryFrequency.MONTHLY).apply { this.id = id++ },
-                        Metric("CAR 2", 15874, "Kilometreage", HistoryFrequency.MONTHLY).apply { this.id = id++ },
-                        Metric("Water", 1420, "Litre", HistoryFrequency.MONTHLY).apply { this.id = id++ },
-                        Metric("Elec", 142078, "Watt", HistoryFrequency.MONTHLY).apply { this.id = id++ },
-                        Metric("CAR 1", 1420, "Kilometreage", HistoryFrequency.MONTHLY).apply { this.id = id++ }
+                        Metric("CAR 1", 1420, "Kilometreage", HistoryFrequency.MONTHLY, LocalDate.now().minusMonths(5)).apply { this.id = id++ },
+                        Metric("CAR 2", 15874, "Kilometreage", HistoryFrequency.MONTHLY, LocalDate.now().minusMonths(5)).apply { this.id = id++ },
+                        Metric("Water", 1420, "Litre", HistoryFrequency.MONTHLY, LocalDate.now().minusMonths(5)).apply { this.id = id++ },
+                        Metric("Elec", 142078, "Watt", HistoryFrequency.MONTHLY, LocalDate.now().minusMonths(5)).apply { this.id = id++ },
+                        Metric("CAR 1", 1420, "Kilometreage", HistoryFrequency.MONTHLY, LocalDate.now().minusMonths(5)).apply { this.id = id++ },
+                        Metric("CAR 1", 1420, "Kilometreage", HistoryFrequency.MONTHLY, LocalDate.now().minusMonths(5)).apply { this.id = id++ },
+                        Metric("CAR 2", 15874, "Kilometreage", HistoryFrequency.MONTHLY, LocalDate.now().minusMonths(5)).apply { this.id = id++ },
+                        Metric("Water", 1420, "Litre", HistoryFrequency.MONTHLY, LocalDate.now().minusMonths(5)).apply { this.id = id++ },
+                        Metric("Elec", 142078, "Watt", HistoryFrequency.MONTHLY, LocalDate.now().minusMonths(5)).apply { this.id = id++ },
+                        Metric("CAR 1", 1420, "Kilometreage", HistoryFrequency.MONTHLY, LocalDate.now().minusMonths(5)).apply { this.id = id++ },
+                        Metric("CAR 1", 1420, "Kilometreage", HistoryFrequency.MONTHLY, LocalDate.now().minusMonths(5)).apply { this.id = id++ },
+                        Metric("CAR 2", 15874, "Kilometreage", HistoryFrequency.MONTHLY, LocalDate.now().minusMonths(5)).apply { this.id = id++ },
+                        Metric("Water", 1420, "Litre", HistoryFrequency.MONTHLY, LocalDate.now().minusMonths(5)).apply { this.id = id++ },
+                        Metric("Elec", 142078, "Watt", HistoryFrequency.MONTHLY, LocalDate.now().minusMonths(5)).apply { this.id = id++ },
+                        Metric("CAR 1", 1420, "Kilometreage", HistoryFrequency.MONTHLY, LocalDate.now().minusMonths(5)).apply { this.id = id++ },
+                        Metric("CAR 1", 1420, "Kilometreage", HistoryFrequency.MONTHLY, LocalDate.now().minusMonths(5)).apply { this.id = id++ },
+                        Metric("CAR 2", 15874, "Kilometreage", HistoryFrequency.MONTHLY, LocalDate.now().minusMonths(5)).apply { this.id = id++ },
+                        Metric("Water", 1420, "Litre", HistoryFrequency.MONTHLY, LocalDate.now().minusMonths(5)).apply { this.id = id++ },
+                        Metric("Elec", 142078, "Watt", HistoryFrequency.MONTHLY, LocalDate.now().minusMonths(5)).apply { this.id = id++ },
+                        Metric("CAR 1", 1420, "Kilometreage", HistoryFrequency.MONTHLY, LocalDate.now().minusMonths(5)).apply { this.id = id++ }
                 )).flatMap { SingleJust(Unit) }
             } else {
                 SingleJust(Unit)
