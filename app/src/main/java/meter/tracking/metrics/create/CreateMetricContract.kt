@@ -2,6 +2,7 @@ package meter.tracking.metrics.create
 
 import meter.tracking.BaseView
 import meter.tracking.db.model.HistoryFrequency
+import java.time.LocalDate
 
 /**
  * @author tweissbeck
@@ -19,6 +20,6 @@ interface CreateMetricContract {
     }
 
     interface Presenter{
-        fun createMetric(name: String?, historyFrequency: HistoryFrequency?, unit: String?)
+        fun createMetric(name: String?, historyFrequency: HistoryFrequency?, unit: String?, localDate: LocalDate)
     }
 }

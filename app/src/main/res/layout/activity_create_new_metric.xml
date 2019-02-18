@@ -89,6 +89,7 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="32dp"
         android:inputType="date"
+        android:onClick="onDateClickListener"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/metric_start_date_label"
         app:layout_constraintTop_toBottomOf="@+id/metric_unit_label" />

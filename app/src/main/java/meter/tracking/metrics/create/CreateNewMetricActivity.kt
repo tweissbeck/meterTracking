@@ -1,10 +1,12 @@
 package meter.tracking.metrics.create
 
+import android.app.DatePickerDialog
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import android.widget.EditText
 import android.widget.Spinner
 import android.widget.TextView
@@ -20,6 +22,8 @@ import meter.tracking.metrics.main.MetersTrackingActivity
 import meter.tracking.metrics.main.MetersTrackingActivity.Companion.TOAST_MESSAGE
 import meter.tracking.rx.SchedulerProvider
 import org.koin.android.ext.android.inject
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
 
 /**
  * This activity allows to create a new metric
@@ -36,6 +40,9 @@ class CreateNewMetricActivity : AppCompatActivity(), CreateMetricContract.View {
     private lateinit var nameEditText: EditText
     private lateinit var unitSpinner: Spinner
     private lateinit var frequencySpinner: Spinner
+    private lateinit var dateTextView: EditText
+
+    private val dateFormat : String = "yyyy/MM/dd"
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -48,6 +55,10 @@ class CreateNewMetricActivity : AppCompatActivity(), CreateMetricContract.View {
         this.nameEditText = findViewById(R.id.metric_name)
         this.frequencySpinner = findViewById(R.id.metric_type)
         this.unitSpinner = findViewById(R.id.metric_unit)
+        this.dateTextView = findViewById(R.id.metric_start_date)
+
+        // Set default value
+        this.dateTextView.setText(LocalDate.now().format(DateTimeFormatter.ofPattern(dateFormat)))
 
         // Menu
         val toolbar = findViewById<Toolbar>(R.id.create_metric_activity_toolbar)
@@ -104,7 +115,8 @@ class CreateNewMetricActivity : AppCompatActivity(), CreateMetricContract.View {
             } else {
                 null
             }
-            this.presenter.createMetric(this.nameEditText.text.toString(), selectedFrequency, selectedUnit)
+            val selectedDate: LocalDate = LocalDate.parse(this.dateTextView.text, DateTimeFormatter.ofPattern(dateFormat))
+            this.presenter.createMetric(this.nameEditText.text.toString(), selectedFrequency, selectedUnit, selectedDate)
             true
         }
         else -> super.onOptionsItemSelected(item)
@@ -141,6 +153,15 @@ class CreateNewMetricActivity : AppCompatActivity(), CreateMetricContract.View {
     }
 
     /* End CreateMetricContract.View impl*/
+
+    @Suppress("UNUSED_PARAMETER") // Parameter is mandatory as this method is used in view
+    fun onDateClickListener(v: View) {
+        val dateFragment = DatePickerFragment()
+        dateFragment.listener = DatePickerDialog.OnDateSetListener { _, year, month, dayOfMonth ->
+            this@CreateNewMetricActivity.dateTextView.setText(LocalDate.of(year, month, dayOfMonth).format(
+                    DateTimeFormatter.ofPattern("yyyy/MM/dd")))
+        }
+    }
 
     private fun setErrorOnSpinner(s: Spinner, error: String) {
         val textView: TextView = s.selectedView as TextView

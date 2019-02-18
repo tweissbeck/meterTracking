@@ -18,7 +18,7 @@ class CreateMetricPresenter(private val view: CreateMetricContract.View, private
 
     private val mCompositeDisposable = CompositeDisposable()
 
-    override fun createMetric(name: String?, historyFrequency: HistoryFrequency?, unit: String?) {
+    override fun createMetric(name: String?, historyFrequency: HistoryFrequency?, unit: String?, localDate: LocalDate) {
         // All field are empty, just return to the metrics list without error
         if (StringUtil.isEmpty(name) && historyFrequency == null && StringUtil.isEmpty(unit)) {
             view.navigateToMetricsList()
@@ -42,7 +42,7 @@ class CreateMetricPresenter(private val view: CreateMetricContract.View, private
 
         // Save the new metric
         if (!error) {
-            val metric = MetricDTO(name!!, historyFrequency!!, unit!!, LocalDate.now())
+            val metric = MetricDTO(name!!, historyFrequency!!, unit!!, localDate)
             val successHandler: (Long) -> Unit = { view.navigateToMetricsListWithNewMetricAdded(name) }
             val errorHandler = { e: Throwable -> view.navigateToMetricsListWithError(e.message ?: "new.metric.error") }
 
