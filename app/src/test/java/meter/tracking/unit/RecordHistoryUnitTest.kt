@@ -1,6 +1,6 @@
 package meter.tracking.unit
 
-import junit.framework.Assert.assertEquals
+import org.junit.Assert.assertEquals
 import meter.tracking.db.model.HistoryFrequency
 import meter.tracking.db.model.MetricRecord
 import meter.tracking.db.model.MetricsWithRecord
@@ -16,8 +16,8 @@ import java.time.LocalDate
  */
 class RecordHistoryUnitTest {
 
-    var metricId: Long = 1
-    var recordId: Long = 1
+    private var metricId: Long = 1
+    private var recordId: Long = 1
     @Before
     fun init() {
         metricId = 1
