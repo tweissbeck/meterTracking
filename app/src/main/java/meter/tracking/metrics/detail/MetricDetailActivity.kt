@@ -7,10 +7,12 @@ import android.view.MenuItem
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import meter.tracking.R
 import meter.tracking.datasource.MetricDataSource
 import meter.tracking.db.model.HistoryFrequency
+import meter.tracking.db.model.MetricRecord
 import meter.tracking.db.model.MetricsWithRecord
 import meter.tracking.metrics.main.MetersTrackingActivity
 import meter.tracking.rx.SchedulerProvider
@@ -31,7 +33,6 @@ class MetricDetailActivity : AppCompatActivity(), MetricDetailContract.MetricDet
     override lateinit var presenter: MetricDetailContract.MetricDetailPresenter
     private val metricDataSource: MetricDataSource by inject()
     private val schedulerProvider: SchedulerProvider by inject()
-    private var metricId: Long? = null
 
 
     private lateinit var viewManager: RecyclerView.LayoutManager
@@ -44,11 +45,10 @@ class MetricDetailActivity : AppCompatActivity(), MetricDetailContract.MetricDet
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_metric_detail)
-        this.presenter = MetricDetailPresenter(this, this.metricDataSource, this.schedulerProvider)
-
+        this.viewManager = LinearLayoutManager(this)
         val metricId = intent.getLongExtra(INTENT_EXTRA_METRIC_ID, -1L)
 
-        this.metricId = metricId
+        this.presenter = MetricDetailPresenter(this, this.metricDataSource, this.schedulerProvider)
         this.presenter.init(metricId)
 
         val toolbar = findViewById<Toolbar>(R.id.detail_metric_activity_tool_bar_xml)
@@ -95,10 +95,10 @@ class MetricDetailActivity : AppCompatActivity(), MetricDetailContract.MetricDet
          * A metric is update when its last record date is in time with its [HistoryFrequency]
          */
         fun isMetricUpdateToDate(): Boolean {
-            val lastRecord = data.records.first()
-            val recordDate = lastRecord.date
-            val now = LocalDate.now()
-            return when (data.historyFrequency) {
+            val lastRecord: MetricRecord? = data.records.firstOrNull()
+            val recordDate: LocalDate? = lastRecord?.date
+            val now: LocalDate = LocalDate.now()
+            return recordDate != null && when (data.historyFrequency) {
                 HistoryFrequency.DAILY -> now.isEqual(recordDate)
                 HistoryFrequency.WEEKLY -> DAYS.between(recordDate, now) < 8
                 HistoryFrequency.MONTHLY -> DAYS.between(recordDate, now) < 31
@@ -107,14 +107,11 @@ class MetricDetailActivity : AppCompatActivity(), MetricDetailContract.MetricDet
         }
 
         val metricUpToDate: Boolean = isMetricUpdateToDate()
-        val average: Long = data.value / data.records.size
 
         this.viewAdapter.setData(data.records)
-
-
         // Now update the view
         this.totalTextView.text = data.value.toString()
-        if(metricUpToDate){
+        if (metricUpToDate) {
 
         }
 
