@@ -1,13 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="@dimen/metric_row_height"
+    android:layout_width="100dp"
+    android:layout_height="match_parent"
     android:layout_margin="8dp"
-    android:orientation="horizontal">
+    android:orientation="vertical">
 
     <TextView
         android:id="@+id/metric_detail_list_view_item_value"
-        android:layout_width="15dp"
+        android:layout_width="50dp"
         android:layout_height="match_parent"
        />
+    <TextView
+        android:id="@+id/metric_detail_list_view_item_date"
+        android:layout_width="50dp"
+        android:layout_height="match_parent" />
 </LinearLayout>

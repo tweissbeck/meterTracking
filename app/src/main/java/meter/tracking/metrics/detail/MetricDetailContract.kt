@@ -2,7 +2,7 @@ package meter.tracking.metrics.detail
 
 import meter.tracking.BasePresenter
 import meter.tracking.BaseView
-import meter.tracking.db.model.MetricsWithRecord
+import meter.tracking.metrics.detail.history.DateValueHolder
 
 /**
  * @author tweissbeck
@@ -13,14 +13,14 @@ interface MetricDetailContract {
     interface MetricDetailView : BaseView<MetricDetailPresenter> {
         /**
          * Update the activity title
-         * @param value the diplayed title
+         * @param value the metric name
          */
         fun updateActivityTitle(value: String)
 
         /**
          * Update metric fields
          */
-        fun updateData(data: MetricsWithRecord)
+        fun updateData(data: Collection<DateValueHolder>, total: String)
 
         /**
          * Return to main activity and display a toast with error message

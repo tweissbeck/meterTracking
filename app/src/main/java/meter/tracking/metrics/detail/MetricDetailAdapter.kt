@@ -5,15 +5,15 @@ import android.view.ViewGroup
 import android.widget.LinearLayout
 import androidx.recyclerview.widget.RecyclerView
 import meter.tracking.R
-import meter.tracking.db.model.MetricRecord
+import meter.tracking.metrics.detail.history.DateValueHolder
 
 /**
  * @author tweissbeck
  * @since 1.0.0
  */
-class MetricDetailAdapter: RecyclerView.Adapter<MetricDetailViewHolder>() {
+class MetricDetailAdapter : RecyclerView.Adapter<MetricDetailViewHolder>() {
 
-    val data: MutableList<MetricRecord> = mutableListOf()
+    private val data: MutableList<DateValueHolder> = mutableListOf()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MetricDetailViewHolder {
         val layout = LayoutInflater.from(parent.context).inflate(R.layout.metric_detail_list_view_item, parent,
@@ -25,12 +25,12 @@ class MetricDetailAdapter: RecyclerView.Adapter<MetricDetailViewHolder>() {
 
     override fun onBindViewHolder(holder: MetricDetailViewHolder, position: Int) {
         val current = data[position]
-        holder.setValue(current.value, current.date)
+        holder.setValue(current.value, current.localDate)
     }
 
-    fun setData(records: List<MetricRecord>) {
+    fun setData(data: Collection<DateValueHolder>) {
         this.data.clear()
-        this.data.addAll(records)
+        this.data.addAll(data)
         this.notifyDataSetChanged()
     }
 }

@@ -12,14 +12,11 @@ import androidx.recyclerview.widget.RecyclerView
 import meter.tracking.R
 import meter.tracking.datasource.MetricDataSource
 import meter.tracking.db.model.HistoryFrequency
-import meter.tracking.db.model.MetricRecord
-import meter.tracking.db.model.MetricsWithRecord
+import meter.tracking.metrics.detail.history.DateValueHolder
 import meter.tracking.metrics.main.MetersTrackingActivity
 import meter.tracking.rx.SchedulerProvider
 import meter.tracking.util.LocalizedStringIdHelper
 import org.koin.android.ext.android.inject
-import java.time.LocalDate
-import java.time.temporal.ChronoUnit.DAYS
 
 /**
  * Display metric detail
@@ -89,31 +86,25 @@ class MetricDetailActivity : AppCompatActivity(), MetricDetailContract.MetricDet
         }
     }
 
-    override fun updateData(data: MetricsWithRecord) {
+    override fun updateData(data: Collection<DateValueHolder>, total: String) {
         /**
          * Return true if the metric is up to date.
          * A metric is update when its last record date is in time with its [HistoryFrequency]
          */
-        fun isMetricUpdateToDate(): Boolean {
-            val lastRecord: MetricRecord? = data.records.firstOrNull()
-            val recordDate: LocalDate? = lastRecord?.date
-            val now: LocalDate = LocalDate.now()
-            return recordDate != null && when (data.historyFrequency) {
-                HistoryFrequency.DAILY -> now.isEqual(recordDate)
-                HistoryFrequency.WEEKLY -> DAYS.between(recordDate, now) < 8
-                HistoryFrequency.MONTHLY -> DAYS.between(recordDate, now) < 31
-                HistoryFrequency.ANNUAL -> DAYS.between(recordDate, now) < 366
-            }
-        }
-
-        val metricUpToDate: Boolean = isMetricUpdateToDate()
-
-        this.viewAdapter.setData(data.records)
+//        fun isMetricUpdateToDate(): Boolean {
+//            val lastRecord: MetricRecord? = data.records.firstOrNull()
+//            val recordDate: LocalDate? = lastRecord?.date
+//            val now: LocalDate = LocalDate.now()
+//            return recordDate != null && when (data.historyFrequency) {
+//                HistoryFrequency.DAILY -> now.isEqual(recordDate)
+//                HistoryFrequency.WEEKLY -> DAYS.between(recordDate, now) < 8
+//                HistoryFrequency.MONTHLY -> DAYS.between(recordDate, now) < 31
+//                HistoryFrequency.ANNUAL -> DAYS.between(recordDate, now) < 366
+//            }
+//        }
+        this.viewAdapter.setData(data)
         // Now update the view
-        this.totalTextView.text = data.value.toString()
-        if (metricUpToDate) {
-
-        }
+        this.totalTextView.text = total
 
     }
 

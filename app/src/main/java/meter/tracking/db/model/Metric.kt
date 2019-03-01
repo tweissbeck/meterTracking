@@ -1,9 +1,6 @@
 package meter.tracking.db.model
 
-import androidx.room.ColumnInfo
-import androidx.room.Entity
-import androidx.room.ForeignKey
-import androidx.room.PrimaryKey
+import androidx.room.*
 import java.time.LocalDate
 
 /**
@@ -19,10 +16,11 @@ import java.time.LocalDate
  */
 @Entity(tableName = "metric",
         foreignKeys = [ForeignKey(entity = MeasuringType::class, parentColumns = ["label"],
-                                  childColumns = ["measureLabel"])])
+                                  childColumns = ["measureLabel"])],
+        indices = [Index(value = ["measureLabel"])])
 open class Metric(val name: String, val value: Long, @ColumnInfo(
         name = "measureLabel") val measureLabel: String,
-                  val historyFrequency: HistoryFrequency, val startDate: LocalDate){
+                  val historyFrequency: HistoryFrequency, val startDate: LocalDate) {
 
     @PrimaryKey
     var id: Long = 0

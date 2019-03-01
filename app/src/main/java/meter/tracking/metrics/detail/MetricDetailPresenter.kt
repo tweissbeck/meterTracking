@@ -1,11 +1,10 @@
 package meter.tracking.metrics.detail
 
 import android.util.Log
-import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
-import io.reactivex.schedulers.Schedulers
 import meter.tracking.datasource.MetricDataSource
 import meter.tracking.db.model.MetricsWithRecord
+import meter.tracking.metrics.detail.history.buildRecordHistory
 import meter.tracking.rx.SchedulerProvider
 
 /**
@@ -31,7 +30,8 @@ class MetricDetailPresenter(private val view: MetricDetailContract.MetricDetailV
         val successHandler: (MetricsWithRecord) -> Unit = { result ->
             Log.i(TAG, "Metric loaded: $result")
             this.view.updateActivityTitle(result.name)
-            this.view.updateData(result)
+            val history = buildRecordHistory(result)
+            this.view.updateData(history, result.value.toString())
         }
 
         val errorHandler: (Throwable) -> Unit = {
