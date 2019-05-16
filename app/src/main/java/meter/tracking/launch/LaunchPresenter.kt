@@ -60,23 +60,25 @@ class LaunchPresenter(private val view: LaunchContract.View,
 
     private fun initTestData(): Completable {
 
-        // An observable that create MeasuringType if needed (aka table is empty)
-        val measuringInitObservable = measuringDataSource.getAll().map { result ->
+        // A completable that create MeasuringType if needed (aka table is empty)
+        val measuringInitObservable: Completable = measuringDataSource.getAll().flatMapCompletable { result ->
+            Log.i(TAG,"Insert Measuring type if needed")
             if (result.isEmpty()) {
-                measuringDataSource.insertAll(arrayOf(
+                Log.i(TAG, "Measuring type is empty inserting")
+                val inserted = measuringDataSource.insertAll(arrayOf(
                         MeasuringType("Kilometreage", 0, "Km"),
                         MeasuringType("Watt", 0, "Watt"),
                         MeasuringType("Litre", 0, "L")
                 ))
-                Unit
+                Log.i(TAG, "Measuring type inserted")
+                inserted.ignoreElement()
             } else {
-                Unit
+                Completable.complete()
             }
-        }.ignoreElement()
+        }
 
         // An observable that create  Metric if needed (aka table is empty)
-        val createTestMetricsObservable = metricsDataSource.getMetrics().subscribeOn(
-                Schedulers.io()).flatMap { t: List<Metric> ->
+        val createTestMetricsObservable = metricsDataSource.getMetrics().flatMapCompletable { t: List<Metric> ->
             if (t.isEmpty()) {
                 var id = 0L
                 metricsDataSource.saveMetrics(arrayOf(
@@ -100,11 +102,11 @@ class LaunchPresenter(private val view: LaunchContract.View,
                         Metric("Water", 1420, "Litre", HistoryFrequency.MONTHLY, LocalDate.now().minusMonths(5)).apply { this.id = id++ },
                         Metric("Elec", 142078, "Watt", HistoryFrequency.MONTHLY, LocalDate.now().minusMonths(5)).apply { this.id = id++ },
                         Metric("CAR 1", 1420, "Kilometreage", HistoryFrequency.MONTHLY, LocalDate.now().minusMonths(5)).apply { this.id = id++ }
-                )).flatMap { SingleJust(Unit) }
+                )).ignoreElement()
             } else {
-                SingleJust(Unit)
+                Completable.complete()
             }
-        }.ignoreElement()
+        }
 
         return measuringInitObservable.andThen(createTestMetricsObservable)
     }
