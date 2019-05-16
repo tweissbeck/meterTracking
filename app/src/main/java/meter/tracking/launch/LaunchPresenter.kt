@@ -61,7 +61,7 @@ class LaunchPresenter(private val view: LaunchContract.View,
     private fun initTestData(): Completable {
 
         // A completable that create MeasuringType if needed (aka table is empty)
-        val measuringInitObservable: Completable = measuringDataSource.getAll().flatMapCompletable { result ->
+        val measuringInitDataCompletable: Completable = measuringDataSource.getAll().flatMapCompletable { result ->
             Log.i(TAG,"Insert Measuring type if needed")
             if (result.isEmpty()) {
                 Log.i(TAG, "Measuring type is empty inserting")
@@ -77,8 +77,8 @@ class LaunchPresenter(private val view: LaunchContract.View,
             }
         }
 
-        // An observable that create  Metric if needed (aka table is empty)
-        val createTestMetricsObservable = metricsDataSource.getMetrics().flatMapCompletable { t: List<Metric> ->
+        // An completable that create  Metric if needed (aka table is empty)
+        val createTestMetricCompletable = metricsDataSource.getMetrics().flatMapCompletable { t: List<Metric> ->
             if (t.isEmpty()) {
                 var id = 0L
                 metricsDataSource.saveMetrics(arrayOf(
@@ -108,6 +108,6 @@ class LaunchPresenter(private val view: LaunchContract.View,
             }
         }
 
-        return measuringInitObservable.andThen(createTestMetricsObservable)
+        return measuringInitDataCompletable.andThen(createTestMetricCompletable)
     }
 }
