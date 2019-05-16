@@ -3,6 +3,7 @@
 
     <item android:id="@+id/action_edit_metric_save"
         android:title="@string/action_new_metric_save"
+        android:icon="@drawable/ic_done_white_24dp"
         app:showAsAction="always"/>
 
 </menu>
