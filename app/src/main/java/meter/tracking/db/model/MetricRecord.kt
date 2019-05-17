@@ -7,15 +7,15 @@ import androidx.room.PrimaryKey
 import java.time.LocalDate
 
 /**
- * @param id
- * @param metric
- * @param value
- * @param date
+ * @param id primary key
+ * @param metricId metric foreign key
+ * @param value current metric value for the date
+ * @param date date of measure
  * @author tweissbeck
  * @since 1.0.0
  */
 @Entity(tableName = "metricRecord",
         foreignKeys = [(ForeignKey(entity = Metric::class, parentColumns = arrayOf("id"),
-                                   childColumns = arrayOf("metric")))],
-        indices = arrayOf(Index(value= ["metric"])))
-class MetricRecord(@PrimaryKey val id: Long, val metric: Long, val value: Long, val date: LocalDate)
+                childColumns = arrayOf("metric")))],
+        indices = arrayOf(Index(value = ["metric"])))
+class MetricRecord(@PrimaryKey val id: Long, val metricId: Long, val value: Long, val date: LocalDate)
