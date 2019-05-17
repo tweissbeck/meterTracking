@@ -14,7 +14,7 @@ class MetricsWithRecord(name: String, value: Long, measureLabel: String,
                         historyFrequency: HistoryFrequency, startDate: LocalDate) :
         Metric(name, value, measureLabel, historyFrequency, startDate) {
 
-    @Relation(parentColumn = "id", entityColumn = "metric")
+    @Relation(parentColumn = "id", entityColumn = "metricId")
     lateinit var records: List<MetricRecord>
 
     override fun toString(): String {

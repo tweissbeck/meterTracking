@@ -16,6 +16,6 @@ import java.time.LocalDate
  */
 @Entity(tableName = "metricRecord",
         foreignKeys = [(ForeignKey(entity = Metric::class, parentColumns = arrayOf("id"),
-                childColumns = arrayOf("metric")))],
-        indices = arrayOf(Index(value = ["metric"])))
+                childColumns = arrayOf("metricId")))],
+        indices = arrayOf(Index(value = ["metricId"])))
 class MetricRecord(@PrimaryKey val id: Long, val metricId: Long, val value: Long, val date: LocalDate)
