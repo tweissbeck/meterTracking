@@ -3,46 +3,40 @@ package meter.tracking.metrics.detail.history
 import meter.tracking.db.model.MetricRecord
 import meter.tracking.db.model.MetricsWithRecord
 import java.time.LocalDate
-import java.util.*
 
-/**
- * A pair binding a [LocalDate] and a record value
- */
-class DateValueHolder(val localDate: LocalDate, val value: Long?) : Comparable<DateValueHolder> {
-    override fun compareTo(other: DateValueHolder): Int {
-        // Date near today first
-        return other.localDate.compareTo(this.localDate)
-    }
+typealias RecordData = Pair<LocalDate, Long?>
 
-    override fun hashCode(): Int = localDate.hashCode()
-    override fun equals(other: Any?): Boolean {
-        if (this === other) return true
-        if (javaClass != other?.javaClass) return false
-        other as DateValueHolder
-        return localDate == other.localDate
-    }
+fun MetricRecord.toDisplayForm(): RecordData {
+    return Pair(this.date, this.value)
 }
 
 /**
  * @author tweissbeck
  * @since 1.0.0
  */
-fun buildRecordHistory(metric: MetricsWithRecord): Collection<DateValueHolder> {
+fun buildRecordHistory(metric: MetricsWithRecord): Collection<RecordData> {
 
-    fun MetricRecord.toDateValueHolder(): DateValueHolder {
-        return DateValueHolder(this.date, this.value)
+    fun <T> getIteratorValueOrNull(iter: Iterator<T>): T? = if (iter.hasNext()) iter.next() else null
+
+    val reverseLocalDateRange = ReverseLocalDateRange(metric.historyFrequency.chronoUnit, metric.startDate, LocalDate.now())
+    val dateRangeInter = reverseLocalDateRange.iterator()
+    val result = mutableListOf<RecordData>()
+    val metricIter = metric.records.sortedByDescending { it.date }.iterator()
+    var currentMetric: MetricRecord? = getIteratorValueOrNull(metricIter)
+    while (dateRangeInter.hasNext()) {
+        val date = dateRangeInter.next()
+        result.add(if (currentMetric != null) {
+            if (currentMetric.date == date) {
+                val pair = Pair(date, currentMetric.value)
+                currentMetric = getIteratorValueOrNull(metricIter)
+                pair
+            } else {
+                Pair(date, null)
+            }
+        } else {
+            Pair(date, null)
+        })
     }
-
-    val values = TreeSet<DateValueHolder>()
-    // Add all value from the metric
-    values.addAll(metric.records.map { it.toDateValueHolder() })
-
-    // Complete with date from range not already set
-    val dateRange = ReverseLocalDateRange(metric.historyFrequency.chronoUnit, metric.startDate, LocalDate.now())
-    for (date in dateRange) {
-        values.add(DateValueHolder(date, null))
-    }
-
-    return values
+    return result
 
 }

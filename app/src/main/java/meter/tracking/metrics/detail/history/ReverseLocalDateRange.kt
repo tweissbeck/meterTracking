@@ -51,7 +51,7 @@ class ReverseLocalDateRange(private val temporalUnit: ChronoUnit, override val s
             private val end: LocalDate = this@ReverseLocalDateRange._endDate
             private val temporalUnit: ChronoUnit = this@ReverseLocalDateRange.temporalUnit
             private var current = end
-            override fun hasNext(): Boolean = current > start
+            override fun hasNext(): Boolean = current >= start
 
             override fun next(): LocalDate {
                 val result = current

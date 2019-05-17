@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.RecyclerView
 import meter.tracking.R
 import meter.tracking.datasource.MetricDataSource
 import meter.tracking.db.model.HistoryFrequency
-import meter.tracking.metrics.detail.history.DateValueHolder
+import meter.tracking.metrics.detail.history.RecordData
 import meter.tracking.metrics.main.MetersTrackingActivity
 import meter.tracking.rx.SchedulerProvider
 import meter.tracking.util.LocalizedStringIdHelper
@@ -86,7 +86,7 @@ class MetricDetailActivity : AppCompatActivity(), MetricDetailContract.MetricDet
         }
     }
 
-    override fun updateData(data: Collection<DateValueHolder>, total: String) {
+    override fun updateData(data: Collection<RecordData>, total: String) {
         /**
          * Return true if the metric is up to date.
          * A metric is update when its last record date is in time with its [HistoryFrequency]
