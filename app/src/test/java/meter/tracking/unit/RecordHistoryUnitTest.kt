@@ -2,7 +2,6 @@ package meter.tracking.unit
 
 import meter.tracking.metrics.detail.history.ReverseLocalDateRange
 import org.junit.Assert.*
-import org.junit.Before
 import org.junit.Test
 import java.time.LocalDate
 import java.time.temporal.ChronoUnit
@@ -13,14 +12,6 @@ import java.time.temporal.ChronoUnit
  * @since 1.0.0
  */
 class RecordHistoryUnitTest {
-
-    private var metricId: Long = 1
-    private var recordId: Long = 1
-    @Before
-    fun init() {
-        metricId = 1
-        recordId = 1
-    }
 
     @Test
     fun testFewDay() {
