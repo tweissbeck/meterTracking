@@ -20,8 +20,8 @@ interface MeasuringTypeDao {
     fun getAll(): Single<List<MeasuringType>>
 
     @Insert
-    fun insert(tuple: MeasuringType): Long
+    fun insert(tuple: MeasuringType): Single<Long>
 
     @Insert
-    fun insertAll(tuples: Array<MeasuringType>): List<Long>
+    fun insertAll(tuples: Array<MeasuringType>): Single<List<Long>>
 }

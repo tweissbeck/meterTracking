@@ -2,7 +2,6 @@ package meter.tracking.datasource
 
 import io.reactivex.Maybe
 import io.reactivex.Single
-import io.reactivex.SingleOnSubscribe
 import meter.tracking.db.dao.MetricDao
 import meter.tracking.db.model.Metric
 import meter.tracking.db.model.MetricsWithRecord
@@ -14,17 +13,11 @@ import meter.tracking.metrics.create.MetricDTO
  */
 class MetricRepository(private val metricDao: MetricDao) : MetricDataSource {
     override fun saveMetric(dto: MetricDTO): Single<Long> {
-        val singleEmitter = SingleOnSubscribe<Long> {
-            metricDao.insert(Metric(dto.name, 0, dto.unit, dto.type, dto.startDate))
-        }
-        return Single.create(singleEmitter)
+        return metricDao.insert(Metric(dto.name, 0L, dto.unit, dto.type, dto.startDate))
     }
 
     override fun saveMetrics(metrics: Array<Metric>): Single<List<Long>> {
-        val singleEmitter = SingleOnSubscribe<List<Long>> {
-            metricDao.insertAll(metrics)
-        }
-        return Single.create(singleEmitter)
+        return metricDao.insertAll(metrics)
     }
 
     override fun init() {

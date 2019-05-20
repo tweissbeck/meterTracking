@@ -11,10 +11,10 @@ import meter.tracking.db.model.MeasuringType
 class MeasuringTypeRepository(private val measuringTypeDao: MeasuringTypeDao) : MeasuringTypeDataSource {
     override fun getAll(): Single<List<MeasuringType>> = measuringTypeDao.getAll()
 
-    override fun insert(tuple: MeasuringType): Single<Long> = Single.create { this.measuringTypeDao.insert(tuple) }
+    override fun insert(tuple: MeasuringType): Single<Long> = this.measuringTypeDao.insert(tuple)
 
-    override fun insertAll(tuples: Array<MeasuringType>): Single<List<Long>> = Single.create {
-        this.measuringTypeDao.insertAll(tuples)
-    }
+    override fun insertAll(tuples: Array<MeasuringType>): Single<List<Long>> =
+            this.measuringTypeDao.insertAll(tuples)
+
 
 }

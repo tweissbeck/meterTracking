@@ -44,7 +44,7 @@ dependencies {
 
     // Room
     implementation "androidx.room:room-runtime:2.1.0-beta01"
-    implementation "android.arch.persistence.room:rxjava2:1.1.1"
+    implementation 'androidx.room:room-rxjava2:2.1.0-beta01'
     kapt "androidx.room:room-compiler:2.1.0-beta01"
 
     // Notification

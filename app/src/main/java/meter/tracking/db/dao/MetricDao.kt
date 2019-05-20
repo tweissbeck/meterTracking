@@ -28,9 +28,9 @@ interface MetricDao {
     fun get(id: Long): Maybe<MetricsWithRecord>
 
     @Insert
-    fun insert(m: Metric): Long
+    fun insert(m: Metric): Single<Long>
 
     @Insert
-    fun insertAll(m: Array<Metric>): List<Long>
+    fun insertAll(m: Array<Metric>): Single<List<Long>>
 
 }
