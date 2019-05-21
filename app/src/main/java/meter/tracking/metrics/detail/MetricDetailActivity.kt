@@ -57,7 +57,7 @@ class MetricDetailActivity : AppCompatActivity(), MetricDetailContract.MetricDet
         }
 
         // Bind recycler view
-        this.viewAdapter = MetricDetailAdapter()
+        this.viewAdapter = MetricDetailAdapter(applicationContext)
         recyclerView = findViewById<RecyclerView>(R.id.metrics_detail_record_list).apply {
             layoutManager = viewManager
             adapter = viewAdapter
@@ -86,7 +86,7 @@ class MetricDetailActivity : AppCompatActivity(), MetricDetailContract.MetricDet
         }
     }
 
-    override fun updateData(data: Collection<RecordData>, total: String) {
+    override fun updateData(type: HistoryFrequency, data: Collection<RecordData>, total: String) {
         /**
          * Return true if the metric is up to date.
          * A metric is update when its last record date is in time with its [HistoryFrequency]
@@ -102,7 +102,7 @@ class MetricDetailActivity : AppCompatActivity(), MetricDetailContract.MetricDet
 //                HistoryFrequency.ANNUAL -> DAYS.between(recordDate, now) < 366
 //            }
 //        }
-        this.viewAdapter.setData(data)
+        this.viewAdapter.setData(data, type)
         // Now update the view
         this.totalTextView.text = total
 

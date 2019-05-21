@@ -2,6 +2,7 @@ package meter.tracking.metrics.detail
 
 import meter.tracking.BasePresenter
 import meter.tracking.BaseView
+import meter.tracking.db.model.HistoryFrequency
 import meter.tracking.metrics.detail.history.RecordData
 
 /**
@@ -20,7 +21,7 @@ interface MetricDetailContract {
         /**
          * Update metric fields
          */
-        fun updateData(data: Collection<RecordData>, total: String)
+        fun updateData(type: HistoryFrequency, data: Collection<RecordData>, total: String)
 
         /**
          * Return to main activity and display a toast with error message

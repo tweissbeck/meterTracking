@@ -31,7 +31,7 @@ class MetricDetailPresenter(private val view: MetricDetailContract.MetricDetailV
             Log.i(TAG, "Metric loaded: $result")
             this.view.updateActivityTitle(result.name)
             val history = buildRecordHistory(result)
-            this.view.updateData(history, result.value.toString())
+            this.view.updateData(result.historyFrequency, history, result.value.toString())
         }
 
         val errorHandler: (Throwable) -> Unit = {
