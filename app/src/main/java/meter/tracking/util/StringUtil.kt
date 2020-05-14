@@ -8,4 +8,5 @@ package meter.tracking.util
 object StringUtil {
 
     fun isEmpty(value: String?) = value == null || value.isEmpty()
+    fun isNotEmpty(value: String?) = value != null && value.isNotBlank()
 }

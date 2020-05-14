@@ -10,7 +10,7 @@
     <string name="action_cancel">Cancel</string>
     <string name="action_new_metric_save">Save</string>
     <string name="metric_form_unit">Unit</string>
-    <string name="metric_form_name_default">Name</string>
+    <string name="metric_form_name_hint">Name</string>
     <string name="metric_start_date_label">Start Date</string>
     <string name="metric_initial_value_label">Initial value</string>
 
@@ -35,5 +35,31 @@
     <string name="toast_new_metric_error">An error occurred while creating new metric: %s</string>
     <string name="detail_total_label">Total</string>
     <string name="detail_last_value_label">Dernier valeur</string>
+    <string name="settings_notification_category">Gestion des notifications</string>
+    <string name="settings_notifications_title">Activer les notifications</string>
+    <string name="settings_notification_time_schedule">Heure de notification</string>
+    <string name="title_activity_settings">Settings</string>
+
+    <!-- Preference Titles -->
+    <string name="messages_header">Messages</string>
+    <string name="sync_header">Sync</string>
+
+    <!-- Messages Preferences -->
+    <string name="signature_title">Your signature</string>
+    <string name="reply_title">Default reply action</string>
+
+    <!-- Sync Preferences -->
+    <string name="sync_title">Sync email periodically</string>
+    <string name="attachment_title">Download incoming attachments</string>
+    <string name="attachment_summary_on">Automatically download attachments for incoming emails
+    </string>
+    <string name="attachment_summary_off">Only download attachments when manually requested</string>
+    <string name="action_export_counters">Export counters as csv</string>
+    <string name="cancel">Cancel</string>
+    <string name="export_counter_dialog_positive_action">Send</string>
+    <string name="export_counters_dialog_message">Export counters as csv file by email</string>
+    <string name="metric_type_hint">Fréquence du compteur</string>
+    <string name="metric_unit_hint">Unité</string>
+    <string name="field_required">Ce champ est requis</string>
 
 </resources>

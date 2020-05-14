@@ -1,22 +1,29 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <item android:id="@+id/action_search"
-        android:title="@string/action_search"
+    <item
+        android:id="@+id/action_search"
         android:icon="@drawable/ic_search_white"
-        app:showAsAction="ifRoom|collapseActionView"
-        app:actionViewClass="androidx.appcompat.widget.SearchView" />
+        android:title="@string/action_search"
+        app:actionViewClass="androidx.appcompat.widget.SearchView"
+        app:showAsAction="ifRoom|collapseActionView" />
 
-    <item android:id="@+id/action_new_metric"
-        android:title="@string/action_new"
+    <item
+        android:id="@+id/action_new_metric"
         android:icon="@drawable/ic_add_white"
-        app:showAsAction="ifRoom|collapseActionView"
-        />
+        android:title="@string/action_new"
+        app:showAsAction="ifRoom|collapseActionView" />
+
+    <item
+        android:id="@+id/action_export_counters"
+        android:title="@string/action_export_counters" />
 
     <!-- Settings, should always be in the overflow -->
-    <item android:id="@+id/action_settings"
+    <item
+        android:id="@+id/action_settings"
+        android:icon="@drawable/ic_action_name"
         android:title="@string/action_settings"
-        app:showAsAction="never"/>
+        app:showAsAction="never" />
 
 
 </menu>

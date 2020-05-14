@@ -1,14 +1,10 @@
 package meter.tracking.db.dao
 
 
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.Query
-import androidx.room.Transaction
-import io.reactivex.Maybe
-import io.reactivex.Single
-import meter.tracking.db.model.Metric
-import meter.tracking.db.model.MetricsWithRecord
+import androidx.lifecycle.LiveData
+import androidx.room.*
+import meter.tracking.db.model.MetricEntity
+import meter.tracking.db.model.MetricWithRecord
 
 
 /**
@@ -21,16 +17,19 @@ import meter.tracking.db.model.MetricsWithRecord
 interface MetricDao {
 
     @Query("SELECT id, name, value, measureLabel, historyFrequency, startDate FROM metric")
-    fun getAll(): Single<List<Metric>>
+    fun getAll(): LiveData<List<MetricEntity>>
 
     @Transaction
-    @Query("SELECT id, name, value, measureLabel, historyFrequency, startDate FROM metric WHERE id = :id")
-    fun get(id: Long): Maybe<MetricsWithRecord>
+    @Query("SELECT * FROM metric WHERE id = :id")
+    fun get(id: Long): LiveData<MetricWithRecord>
 
     @Insert
-    fun insert(m: Metric): Single<Long>
+    fun insert(m: MetricEntity): Long
 
     @Insert
-    fun insertAll(m: Array<Metric>): Single<List<Long>>
+    fun insertAll(m: Array<MetricEntity>): List<Long>
+
+    @Query("Delete from metric")
+    fun deleteAll()
 
 }

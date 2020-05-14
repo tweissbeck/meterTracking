@@ -1,6 +1,6 @@
 package meter.tracking.unit
 
-import meter.tracking.metrics.detail.history.ReverseLocalDateRange
+import meter.tracking.ui.metrics.detail.history.ReverseLocalDateRange
 import org.junit.Assert.*
 import org.junit.Test
 import java.time.LocalDate
